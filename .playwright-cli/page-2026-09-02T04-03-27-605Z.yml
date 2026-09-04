@@ -1,0 +1,358 @@
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - link "Перейти к основному содержанию" [ref=e3] [cursor=pointer]:
+      - /url: "#main-content"
+    - banner [ref=e4]:
+      - link "SiteScan — на главную" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e9]: SITESCAN
+      - generic [ref=e10]: Локальный инструментБез передачи истории
+    - main [ref=e13]:
+      - generic [ref=e14]:
+        - generic [ref=e15]:
+          - generic [ref=e16]: "01"
+          - text: Технический SEO-аудит
+        - generic [ref=e17]:
+          - generic [ref=e18]:
+            - heading "Увидеть сайт глазами поисковика." [level=1] [ref=e19]: Увидеть сайтглазами поисковика.
+            - paragraph [ref=e20]: SiteScan проходит по страницам, находит то, что мешает индексации и росту, расставляет задачи по приоритету и собирает понятный PDF-отчёт.
+          - generic "Возможности аудита" [ref=e21]:
+            - paragraph [ref=e22]: Проверяет
+            - list [ref=e23]:
+              - listitem [ref=e24]: Индексацию и техническое SEO
+              - listitem [ref=e27]: Мета-теги, контент и ссылки
+              - listitem [ref=e30]: Изображения и Schema.org
+              - listitem [ref=e33]: Готовность к AI-поиску
+        - generic [ref=e36]:
+          - generic [ref=e37]: Адрес сайта
+          - generic [ref=e38]:
+            - textbox "Адрес сайта" [ref=e43]:
+              - /placeholder: example.com или https://example.com
+            - generic [ref=e44]:
+              - generic [ref=e45]: Страниц
+              - combobox "Максимум страниц для проверки" [ref=e46]:
+                - option "10"
+                - option "25" [selected]
+                - option "50"
+                - option "100"
+            - button "Начать аудит" [ref=e47] [cursor=pointer]
+          - generic [ref=e53]:
+            - generic [ref=e54]:
+              - text: Целевые ключевые фразы
+              - generic [ref=e55]: необязательно, до 10 через запятую
+            - textbox "Целевые ключевые фразы необязательно, до 10 через запятую" [ref=e56]:
+              - /placeholder: "например: seo аудит, продвижение сайта, техническое seo"
+          - generic [ref=e57]:
+            - paragraph [ref=e58]: Запросы выполняются с вашего компьютера. Приватные адреса защищённо блокируются.
+            - button "Посмотреть пример отчёта" [ref=e62] [cursor=pointer]
+      - region "Этапы проверки" [ref=e63]:
+        - generic [ref=e64]:
+          - generic [ref=e65]: "01"
+          - strong [ref=e66]: Сканирование
+          - generic [ref=e67]: до 100 страниц
+        - generic [ref=e68]:
+          - generic [ref=e69]: "02"
+          - strong [ref=e70]: Диагностика
+          - generic [ref=e71]: более 100 сигналов
+        - generic [ref=e72]:
+          - generic [ref=e73]: "03"
+          - strong [ref=e74]: Приоритеты
+          - generic [ref=e75]: что исправлять первым
+        - generic [ref=e76]:
+          - generic [ref=e77]: "04"
+          - strong [ref=e78]: PDF-отчёт
+          - generic [ref=e79]: готов к сохранению
+      - generic [ref=e114]:
+        - generic [ref=e115]:
+          - generic [ref=e121]:
+            - generic [ref=e122]: ЛОКАЛЬНАЯ ИСТОРИЯ
+            - heading "Последние аудиты" [level=2] [ref=e123]
+          - button "Очистить" [ref=e125] [cursor=pointer]
+        - article [ref=e127]:
+          - generic [ref=e128]: "68"
+          - generic [ref=e129]:
+            - strong [ref=e130]: example-store.ru
+            - paragraph [ref=e131]: 02 сент., 10:01 · 3 стр. · 6 ошибок
+          - generic [ref=e132]: первый
+          - generic [ref=e133]:
+            - button "Открыть" [ref=e134] [cursor=pointer]
+            - button "↻ Повторить" [ref=e135] [cursor=pointer]
+      - generic [ref=e136]:
+        - generic [ref=e137]:
+          - generic [ref=e138]:
+            - paragraph [ref=e139]:
+              - generic [ref=e140]: REPORT
+              - text: Аудит завершён
+            - heading "SEO-здоровье сайта" [level=2] [ref=e141]
+            - paragraph [ref=e142]: https://example-store.ru/
+          - generic [ref=e143]:
+            - button "Новый аудит" [ref=e144] [cursor=pointer]
+            - button "Скачать данные отчёта в JSON" [ref=e148] [cursor=pointer]
+            - button "Скачать таблицу страниц в CSV" [ref=e152] [cursor=pointer]
+            - button "Скачать план исправлений для Codex" [ref=e156] [cursor=pointer]
+            - button "Скачать PDF" [ref=e160] [cursor=pointer]
+        - generic [ref=e164]:
+          - generic [ref=e165]:
+            - generic [ref=e166]:
+              - strong [ref=e167]: "68"
+              - generic [ref=e168]: / 100
+            - generic [ref=e169]:
+              - generic [ref=e170]: C
+              - heading "Есть заметный потенциал" [level=3] [ref=e171]
+              - paragraph [ref=e172]: Начните с индексации и критичных технических ошибок — они сильнее всего мешают росту.
+          - generic [ref=e173]:
+            - generic [ref=e174]:
+              - term [ref=e175]: Проверено
+              - definition [ref=e176]: "3"
+              - text: страниц
+            - generic [ref=e177]:
+              - term [ref=e178]: Критично
+              - definition [ref=e179]: "1"
+              - text: ошибок
+            - generic [ref=e180]:
+              - term [ref=e181]: Высокий риск
+              - definition [ref=e182]: "2"
+              - text: ошибок
+            - generic [ref=e183]:
+              - term [ref=e184]: Время
+              - definition [ref=e185]: "6.8"
+              - text: секунд
+        - tablist "Разделы отчёта" [ref=e186]:
+          - tab "Обзор" [ref=e187] [cursor=pointer]
+          - tab "Все ошибки 6" [ref=e188] [cursor=pointer]
+          - tab "Ключи и контент" [selected] [ref=e189] [cursor=pointer]
+          - tab "Страницы" [ref=e190] [cursor=pointer]
+          - tab "Архитектура" [ref=e191] [cursor=pointer]
+          - tab "Техническое" [ref=e192] [cursor=pointer]
+          - tab "Инструменты" [ref=e193] [cursor=pointer]
+        - tabpanel [ref=e443]:
+          - generic [ref=e444]:
+            - generic [ref=e445]:
+              - generic [ref=e446]: Качество контента
+              - strong [ref=e447]: "78"
+              - generic [ref=e448]: средняя оценка
+            - generic [ref=e449]:
+              - generic [ref=e450]: Читабельность
+              - strong [ref=e451]: "82"
+              - generic [ref=e452]: эвристика 0–100
+            - generic [ref=e453]:
+              - generic [ref=e454]: AI-цитируемость
+              - strong [ref=e455]: "66"
+              - generic [ref=e456]: структура и доказательства
+            - generic [ref=e457]:
+              - generic [ref=e458]: Тонкие страницы
+              - strong [ref=e459]: "0"
+              - generic [ref=e460]: из 3
+          - generic [ref=e461]:
+            - generic [ref=e462]:
+              - generic [ref=e463]:
+                - text: CONTENT QUALITY MODEL
+                - heading "Качество сайта по 10 измерениям" [level=3] [ref=e464]
+              - generic [ref=e465]: объяснимая эвристика
+            - generic [ref=e466]:
+              - generic [ref=e468]:
+                - generic [ref=e469]: Интент
+                - strong [ref=e470]: "84"
+              - generic [ref=e474]:
+                - generic [ref=e475]: Полнота
+                - strong [ref=e476]: "76"
+              - generic [ref=e480]:
+                - generic [ref=e481]: Структура
+                - strong [ref=e482]: "82"
+              - generic [ref=e486]:
+                - generic [ref=e487]: Читаемость
+                - strong [ref=e488]: "82"
+              - generic [ref=e492]:
+                - generic [ref=e493]: Уникальность
+                - strong [ref=e494]: "78"
+              - generic [ref=e498]:
+                - generic [ref=e499]: Опыт
+                - strong [ref=e500]: "61"
+              - generic [ref=e504]:
+                - generic [ref=e505]: Экспертность
+                - strong [ref=e506]: "58"
+              - generic [ref=e510]:
+                - generic [ref=e511]: Доверие
+                - strong [ref=e512]: "74"
+              - generic [ref=e516]:
+                - generic [ref=e517]: Ключевые фразы
+                - strong [ref=e518]: "79"
+              - generic [ref=e522]:
+                - generic [ref=e523]: AI-цитирование
+                - strong [ref=e524]: "66"
+            - generic [ref=e527]:
+              - generic [ref=e528]:
+                - strong [ref=e529]: "0"
+                - generic [ref=e530]: страниц со слабым интентом
+              - generic [ref=e531]:
+                - strong [ref=e532]: "1"
+                - generic [ref=e533]: без убедительного опыта
+              - generic [ref=e534]:
+                - strong [ref=e535]: "0"
+                - generic [ref=e536]: с риском повторов
+              - generic [ref=e537]:
+                - strong [ref=e538]: "0"
+                - generic [ref=e539]: со слабой экспертностью
+          - generic [ref=e540]:
+            - generic [ref=e541]:
+              - generic [ref=e543]:
+                - text: СЕМАНТИКА
+                - heading "Целевые ключевые фразы" [level=3] [ref=e544]
+              - generic [ref=e546]:
+                - generic [ref=e547]:
+                  - generic [ref=e548]: Фраза
+                  - generic [ref=e549]: Вхождения
+                  - generic [ref=e550]: Страницы
+                  - generic [ref=e551]: Плотность
+                  - generic [ref=e552]: Title
+                  - generic [ref=e553]: H1
+                - generic [ref=e554]:
+                  - strong [ref=e555]: товары для дома
+                  - generic [ref=e556]: "7"
+                  - generic [ref=e557]: 100%
+                  - generic [ref=e558]: 0.39%
+                  - generic [ref=e559]: 33%
+                  - generic [ref=e560]: 33%
+                - generic [ref=e561]:
+                  - strong [ref=e562]: доставка
+                  - generic [ref=e563]: "9"
+                  - generic [ref=e564]: 100%
+                  - generic [ref=e565]: 0.48%
+                  - generic [ref=e566]: 33%
+                  - generic [ref=e567]: 33%
+            - generic [ref=e568]:
+              - generic [ref=e570]:
+                - text: ЧАСТОТНОСТЬ
+                - heading "Главные термины сайта" [level=3] [ref=e571]
+              - generic [ref=e572]:
+                - generic [ref=e573]:
+                  - generic [ref=e574]: "01"
+                  - strong [ref=e575]: товары
+                  - generic [ref=e578]: 38 · 1.98% · 3 стр.
+                - generic [ref=e579]:
+                  - generic [ref=e580]: "02"
+                  - strong [ref=e581]: доставка
+                  - generic [ref=e584]: 18 · 0.94% · 3 стр.
+                - generic [ref=e585]:
+                  - generic [ref=e586]: "03"
+                  - strong [ref=e587]: интерьер
+                  - generic [ref=e590]: 15 · 0.78% · 2 стр.
+                - generic [ref=e591]:
+                  - generic [ref=e592]: "04"
+                  - strong [ref=e593]: оплата
+                  - generic [ref=e596]: 11 · 0.57% · 2 стр.
+          - generic [ref=e597]:
+            - generic [ref=e599]:
+              - text: СТРАНИЦЫ
+              - heading "Качество контента" [level=3] [ref=e600]
+            - table [ref=e602]:
+              - rowgroup [ref=e603]:
+                - row [ref=e604]:
+                  - columnheader "URL / тип" [ref=e605]
+                  - columnheader "Контент" [ref=e606]
+                  - columnheader "Интент" [ref=e607]
+                  - columnheader "Полнота" [ref=e608]
+                  - columnheader "Опыт" [ref=e609]
+                  - columnheader "Экспертность" [ref=e610]
+                  - columnheader "Доверие" [ref=e611]
+                  - columnheader "AI" [ref=e612]
+                  - columnheader "Проверки" [ref=e613]
+                  - columnheader "Слова" [ref=e614]
+                  - columnheader [ref=e615]
+              - rowgroup [ref=e616]:
+                - row [ref=e617]:
+                  - cell "example-store.ru homepage · navigational" [ref=e618]:
+                    - link "example-store.ru" [ref=e619] [cursor=pointer]:
+                      - /url: https://example-store.ru/
+                    - generic [ref=e620]: homepage · navigational
+                  - cell [ref=e621]:
+                    - strong [ref=e622]: 78 · B
+                  - cell "84" [ref=e623]
+                  - cell "76" [ref=e624]
+                  - cell "61" [ref=e625]
+                  - cell "58" [ref=e626]
+                  - cell "74" [ref=e627]
+                  - cell "66" [ref=e628]
+                  - cell "4/6" [ref=e629]
+                  - cell "640" [ref=e631]
+                  - cell [ref=e632]:
+                    - button "Разбор + промпты" [ref=e633] [cursor=pointer]
+                - row [ref=e634]:
+                  - cell "example-store.ru/catalog category · commercial" [ref=e635]:
+                    - link "example-store.ru/catalog" [ref=e636] [cursor=pointer]:
+                      - /url: https://example-store.ru/catalog
+                    - generic [ref=e637]: category · commercial
+                  - cell [ref=e638]:
+                    - strong [ref=e639]: 78 · B
+                  - cell "84" [ref=e640]
+                  - cell "76" [ref=e641]
+                  - cell "61" [ref=e642]
+                  - cell "58" [ref=e643]
+                  - cell "74" [ref=e644]
+                  - cell "66" [ref=e645]
+                  - cell "4/6" [ref=e646]
+                  - cell "640" [ref=e648]
+                  - cell [ref=e649]:
+                    - button "Разбор + промпты" [active] [ref=e650] [cursor=pointer]
+                - row [ref=e651]:
+                  - cell "example-store.ru/delivery landing · navigational" [ref=e652]:
+                    - link "example-store.ru/delivery" [ref=e653] [cursor=pointer]:
+                      - /url: https://example-store.ru/delivery
+                    - generic [ref=e654]: landing · navigational
+                  - cell [ref=e655]:
+                    - strong [ref=e656]: 78 · B
+                  - cell "84" [ref=e657]
+                  - cell "76" [ref=e658]
+                  - cell "61" [ref=e659]
+                  - cell "58" [ref=e660]
+                  - cell "74" [ref=e661]
+                  - cell "66" [ref=e662]
+                  - cell "4/6" [ref=e663]
+                  - cell "640" [ref=e665]
+                  - cell [ref=e666]:
+                    - button "Разбор + промпты" [ref=e667] [cursor=pointer]
+          - generic [ref=e668]:
+            - generic [ref=e669]:
+              - generic [ref=e671]:
+                - text: ДУБЛИКАТЫ
+                - heading "Повторяющиеся элементы" [level=3] [ref=e672]
+              - paragraph [ref=e674]: Межстраничных дублей не найдено.
+            - generic [ref=e675]:
+              - generic [ref=e677]:
+                - text: ПЕРЕЛИНКОВКА
+                - heading "Популярные анкоры" [level=3] [ref=e678]
+              - generic [ref=e679]:
+                - generic [ref=e680]:
+                  - generic [ref=e681]: "14"
+                  - paragraph [ref=e682]:
+                    - strong [ref=e683]: каталог
+                    - generic [ref=e684]: ведёт на 1 URL
+                - generic [ref=e685]:
+                  - generic [ref=e686]: "7"
+                  - paragraph [ref=e687]:
+                    - strong [ref=e688]: доставка и оплата
+                    - generic [ref=e689]: ведёт на 1 URL
+                - generic [ref=e690]:
+                  - generic [ref=e691]: "5"
+                  - paragraph [ref=e692]:
+                    - strong [ref=e693]: подробнее
+                    - generic [ref=e694]: ведёт на 4 URL
+          - generic [ref=e695]:
+            - generic [ref=e696]:
+              - generic [ref=e697]:
+                - text: SEARCH CONSOLE
+                - heading "Поисковые возможности из CSV" [level=3] [ref=e698]
+              - generic [ref=e699] [cursor=pointer]:
+                - text: Импорт CSV
+                - button "Импорт CSV"
+            - paragraph [ref=e700]: Экспортируйте таблицу «Страницы» или «Запросы» из Google Search Console. Файл разбирается только в браузере и добавляет клики, показы, CTR и позицию к локальному отчёту.
+            - paragraph [ref=e702]: CSV ещё не загружен.
+    - contentinfo [ref=e80]:
+      - generic [ref=e81]: SITESCAN
+      - paragraph [ref=e86]: Локальный SEO-аудитор. Без аккаунтов и трекеров. История хранится только в вашем браузере.
+      - generic [ref=e87]: v2.0
+  - generic [ref=e90]:
+    - button [ref=e91]
+    - button [ref=e97]
+    - button [ref=e101]
+    - button [ref=e106]

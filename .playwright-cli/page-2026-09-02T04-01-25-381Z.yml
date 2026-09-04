@@ -1,0 +1,73 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - link "Перейти к основному содержанию" [ref=e3] [cursor=pointer]:
+      - /url: "#main-content"
+    - banner [ref=e4]:
+      - link "SiteScan — на главную" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e9]: SITESCAN
+      - generic [ref=e10]: Локальный инструментБез передачи истории
+    - main [ref=e13]:
+      - generic [ref=e14]:
+        - generic [ref=e15]:
+          - generic [ref=e16]: "01"
+          - text: Технический SEO-аудит
+        - generic [ref=e17]:
+          - generic [ref=e18]:
+            - heading "Увидеть сайт глазами поисковика." [level=1] [ref=e19]: Увидеть сайтглазами поисковика.
+            - paragraph [ref=e20]: SiteScan проходит по страницам, находит то, что мешает индексации и росту, расставляет задачи по приоритету и собирает понятный PDF-отчёт.
+          - generic "Возможности аудита" [ref=e21]:
+            - paragraph [ref=e22]: Проверяет
+            - list [ref=e23]:
+              - listitem [ref=e24]: Индексацию и техническое SEO
+              - listitem [ref=e27]: Мета-теги, контент и ссылки
+              - listitem [ref=e30]: Изображения и Schema.org
+              - listitem [ref=e33]: Готовность к AI-поиску
+        - generic [ref=e36]:
+          - generic [ref=e37]: Адрес сайта
+          - generic [ref=e38]:
+            - textbox "Адрес сайта" [ref=e43]:
+              - /placeholder: example.com или https://example.com
+            - generic [ref=e44]:
+              - generic [ref=e45]: Страниц
+              - combobox "Максимум страниц для проверки" [ref=e46]:
+                - option "10"
+                - option "25" [selected]
+                - option "50"
+                - option "100"
+            - button "Начать аудит" [ref=e47] [cursor=pointer]
+          - generic [ref=e53]:
+            - generic [ref=e54]:
+              - text: Целевые ключевые фразы
+              - generic [ref=e55]: необязательно, до 10 через запятую
+            - textbox "Целевые ключевые фразы необязательно, до 10 через запятую" [ref=e56]:
+              - /placeholder: "например: seo аудит, продвижение сайта, техническое seo"
+          - generic [ref=e57]:
+            - paragraph [ref=e58]: Запросы выполняются с вашего компьютера. Приватные адреса защищённо блокируются.
+            - button "Посмотреть пример отчёта" [ref=e62] [cursor=pointer]
+      - region "Этапы проверки" [ref=e63]:
+        - generic [ref=e64]:
+          - generic [ref=e65]: "01"
+          - strong [ref=e66]: Сканирование
+          - generic [ref=e67]: до 100 страниц
+        - generic [ref=e68]:
+          - generic [ref=e69]: "02"
+          - strong [ref=e70]: Диагностика
+          - generic [ref=e71]: более 100 сигналов
+        - generic [ref=e72]:
+          - generic [ref=e73]: "03"
+          - strong [ref=e74]: Приоритеты
+          - generic [ref=e75]: что исправлять первым
+        - generic [ref=e76]:
+          - generic [ref=e77]: "04"
+          - strong [ref=e78]: PDF-отчёт
+          - generic [ref=e79]: готов к сохранению
+    - contentinfo [ref=e80]:
+      - generic [ref=e81]: SITESCAN
+      - paragraph [ref=e86]: Локальный SEO-аудитор. Без аккаунтов и трекеров. История хранится только в вашем браузере.
+      - generic [ref=e87]: v2.0
+  - generic [ref=e90]:
+    - button [ref=e91]
+    - button [ref=e97]
+    - button [ref=e101]
+    - button [ref=e106]

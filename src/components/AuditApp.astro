@@ -1,0 +1,1045 @@
+---
+import { Activity, ArrowRight, Bot, Braces, Check, ChevronDown, Download, FileSearch, FileSpreadsheet, Gauge, Globe, History, ListChecks, Network, Search, ShieldCheck, Sparkles, X } from '@lucide/astro';
+---
+<div class="shell">
+  <a class="skip-link" href="#main-content">Перейти к основному содержанию</a>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="SiteScan — на главную">
+      <span class="brand-mark"><Activity size={17} stroke-width={2.4} /></span>
+      <span>SITE<span>SCAN</span></span>
+    </a>
+    <div class="topbar-meta">
+      <span class="status-dot" aria-hidden="true"></span>
+      Локальный инструмент
+      <span class="topbar-divider" aria-hidden="true"></span>
+      Без передачи истории
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" id="audit-start">
+      <div class="eyebrow"><span>01</span> Технический SEO-аудит</div>
+      <div class="hero-grid">
+        <div>
+          <h1>Увидеть сайт<br />глазами поисковика.</h1>
+          <p class="hero-copy">SiteScan проходит по страницам, находит то, что мешает индексации и росту, расставляет задачи по приоритету и собирает понятный PDF-отчёт.</p>
+        </div>
+        <div class="hero-aside" aria-label="Возможности аудита">
+          <p>Проверяет</p>
+          <ul>
+            <li><Check size={14} /> Индексацию и техническое SEO</li>
+            <li><Check size={14} /> Мета-теги, контент и ссылки</li>
+            <li><Check size={14} /> Изображения и Schema.org</li>
+            <li><Check size={14} /> Готовность к AI-поиску</li>
+          </ul>
+        </div>
+      </div>
+
+      <form class="audit-form" id="audit-form">
+        <label for="site-url">Адрес сайта</label>
+        <div class="input-row">
+          <div class="url-field">
+            <Globe size={20} aria-hidden="true" />
+            <input id="site-url" name="url" type="text" inputmode="url" autocomplete="url" autocapitalize="none" spellcheck="false" placeholder="example.com или https://example.com" required />
+          </div>
+          <label class="limit-field">
+            <span>Страниц</span>
+            <select id="crawl-limit" name="limit" aria-label="Максимум страниц для проверки">
+              <option value="10">10</option>
+              <option value="25" selected>25</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+            </select>
+            <ChevronDown size={15} aria-hidden="true" />
+          </label>
+          <button class="primary-button" type="submit">
+            <Search size={18} />
+            Начать аудит
+            <ArrowRight size={17} />
+          </button>
+        </div>
+        <label class="keyword-field" for="target-keywords">
+          <span>Целевые ключевые фразы <small>необязательно, до 10 через запятую</small></span>
+          <input id="target-keywords" name="keywords" type="text" autocomplete="off" placeholder="например: seo аудит, продвижение сайта, техническое seo" />
+        </label>
+        <div class="form-foot">
+          <p><ShieldCheck size={14} /> Запросы выполняются с вашего компьютера. Приватные адреса защищённо блокируются.</p>
+          <button type="button" class="text-button" id="demo-button">Посмотреть пример отчёта</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="process-strip" aria-label="Этапы проверки">
+      <div><span>01</span><strong>Сканирование</strong><small>до 100 страниц</small></div>
+      <div><span>02</span><strong>Диагностика</strong><small>более 100 сигналов</small></div>
+      <div><span>03</span><strong>Приоритеты</strong><small>что исправлять первым</small></div>
+      <div><span>04</span><strong>PDF-отчёт</strong><small>готов к сохранению</small></div>
+    </section>
+
+    <section class="history-panel" id="history-panel" hidden>
+      <div class="history-head"><div><History size={20} /><div><span>ЛОКАЛЬНАЯ ИСТОРИЯ</span><h2>Последние аудиты</h2></div></div><div class="history-actions"><button type="button" id="history-toggle" hidden>Показать все</button><button type="button" id="clear-history">Очистить</button></div></div>
+      <div class="history-list" id="history-list"></div>
+    </section>
+
+    <section class="loading-panel" id="loading-panel" hidden aria-live="polite">
+      <div class="scan-visual" aria-hidden="true">
+        <div class="scan-grid"></div>
+        <div class="scan-line"></div>
+        <FileSearch size={42} />
+      </div>
+      <div>
+        <p class="eyebrow"><span>LIVE</span> Анализ сайта</p>
+        <h2 id="loading-title">Подключаемся к сайту…</h2>
+        <p id="loading-message">Проверяем доступность, robots.txt и sitemap.xml.</p>
+        <div class="progress-track"><span id="progress-bar"></span></div>
+        <p class="loading-live-metrics" id="loading-metrics">Подготовка сканера…</p>
+        <div class="loading-steps">
+          <span class="active">Доступность</span><span>Страницы</span><span>SEO-сигналы</span><span>Отчёт</span>
+        </div>
+        <button class="cancel-audit" type="button" id="cancel-audit"><X size={15} /> Отменить аудит</button>
+      </div>
+    </section>
+
+    <section class="error-panel" id="error-panel" hidden role="alert">
+      <div class="error-code">!</div>
+      <div><strong>Аудит не запустился</strong><p id="error-message"></p></div>
+      <button type="button" id="retry-button">Попробовать снова</button>
+    </section>
+
+    <section class="results" id="results" hidden aria-live="polite">
+      <div class="results-head">
+        <div>
+          <p class="eyebrow"><span>REPORT</span> Аудит завершён</p>
+          <h2>SEO-здоровье сайта</h2>
+          <p class="report-url" id="report-url"></p>
+        </div>
+        <div class="results-actions">
+          <button class="secondary-button" type="button" id="new-audit"><Search size={16} /> Новый аудит</button>
+          <button class="icon-export" type="button" id="export-json" title="Скачать JSON" aria-label="Скачать данные отчёта в JSON"><Braces size={17} /></button>
+          <button class="icon-export" type="button" id="export-csv" title="Скачать CSV" aria-label="Скачать таблицу страниц в CSV"><FileSpreadsheet size={17} /></button>
+          <button class="icon-export codex-export" type="button" id="export-codex" title="Скачать план для Codex" aria-label="Скачать план исправлений для Codex"><Bot size={18} /></button>
+          <button class="primary-button compact" type="button" id="download-pdf"><Download size={17} /> Скачать PDF</button>
+        </div>
+      </div>
+
+      <div class="scoreboard">
+        <div class="score-main">
+          <div class="score-ring" id="score-ring">
+            <strong id="score-value">0</strong><span>/ 100</span>
+          </div>
+          <div><span class="grade" id="score-grade">—</span><h3 id="score-label">Оценка сайта</h3><p id="score-summary"></p></div>
+        </div>
+        <dl class="summary-stats">
+          <div><dt>Проверено</dt><dd id="pages-count">0</dd><small>страниц</small></div>
+          <div><dt>Критично</dt><dd class="critical-text" id="critical-count">0</dd><small>ошибок</small></div>
+          <div><dt>Высокий риск</dt><dd class="high-text" id="high-count">0</dd><small>ошибок</small></div>
+          <div><dt>Время</dt><dd id="duration-value">0</dd><small>секунд</small></div>
+        </dl>
+      </div>
+
+      <section class="comparison-strip" id="comparison-strip" hidden>
+        <div><span>СРАВНЕНИЕ</span><strong>Изменения с прошлого аудита</strong><small id="comparison-date"></small></div>
+        <div><span>Оценка</span><strong id="compare-score">—</strong></div>
+        <div><span>Всего ошибок</span><strong id="compare-issues">—</strong></div>
+        <div><span>Критичных</span><strong id="compare-critical">—</strong></div>
+        <div><span>Страниц</span><strong id="compare-pages">—</strong></div>
+      </section>
+
+      <div class="section-nav" role="tablist" aria-label="Разделы отчёта">
+        <button class="active" role="tab" aria-selected="true" data-tab="overview">Обзор</button>
+        <button role="tab" aria-selected="false" data-tab="issues">Все ошибки <span id="issues-badge">0</span></button>
+        <button role="tab" aria-selected="false" data-tab="content">Ключи и контент</button>
+        <button role="tab" aria-selected="false" data-tab="pages">Страницы</button>
+        <button role="tab" aria-selected="false" data-tab="architecture">Архитектура</button>
+        <button role="tab" aria-selected="false" data-tab="technical">Техническое</button>
+        <button role="tab" aria-selected="false" data-tab="tools">Инструменты</button>
+      </div>
+
+      <div class="tab-panel" id="tab-content" role="tabpanel" hidden>
+        <div class="content-kpis" id="content-kpis"></div>
+        <section class="data-section content-dimension-section">
+          <div class="section-title"><div><span>CONTENT QUALITY MODEL</span><h3>Качество сайта по 10 измерениям</h3></div><span class="heuristic-badge">объяснимая эвристика</span></div>
+          <div class="content-dimension-grid" id="content-dimensions"></div>
+          <div class="content-risk-strip" id="content-risks"></div>
+        </section>
+        <div class="content-layout">
+          <section class="data-section keywords-section">
+            <div class="section-title"><div><span>СЕМАНТИКА</span><h3>Целевые ключевые фразы</h3></div></div>
+            <div id="keyword-report"></div>
+          </section>
+          <section class="data-section">
+            <div class="section-title"><div><span>ЧАСТОТНОСТЬ</span><h3>Главные термины сайта</h3></div></div>
+            <div class="term-list" id="top-terms"></div>
+          </section>
+        </div>
+        <section class="data-section content-pages-section">
+          <div class="section-title"><div><span>СТРАНИЦЫ</span><h3>Качество контента</h3></div></div>
+          <div class="table-wrap borderless">
+            <table><thead><tr><th>URL / тип</th><th>Контент</th><th>Интент</th><th>Полнота</th><th>Опыт</th><th>Экспертность</th><th>Доверие</th><th>AI</th><th>Проверки</th><th>Слова</th><th></th></tr></thead><tbody id="content-pages-table"></tbody></table>
+          </div>
+        </section>
+        <div class="content-layout lower">
+          <section class="data-section">
+            <div class="section-title"><div><span>ДУБЛИКАТЫ</span><h3>Повторяющиеся элементы</h3></div></div>
+            <div id="duplicate-report" class="plain-list"></div>
+          </section>
+          <section class="data-section">
+            <div class="section-title"><div><span>ПЕРЕЛИНКОВКА</span><h3>Популярные анкоры</h3></div></div>
+            <div id="anchor-report" class="plain-list"></div>
+          </section>
+        </div>
+        <section class="data-section import-section">
+          <div class="section-title"><div><span>SEARCH CONSOLE</span><h3>Поисковые возможности из CSV</h3></div><label class="file-action">Импорт CSV<input id="gsc-import" type="file" accept=".csv,text/csv" /></label></div>
+          <p class="architecture-note">Экспортируйте таблицу «Страницы» или «Запросы» из Google Search Console. Файл разбирается только в браузере и добавляет клики, показы, CTR и позицию к локальному отчёту.</p>
+          <div id="gsc-report"><p class="empty-state">CSV ещё не загружен.</p></div>
+        </section>
+      </div>
+
+      <div class="tab-panel" id="tab-overview" role="tabpanel">
+        <div class="overview-grid">
+          <section class="category-panel">
+            <div class="section-title"><div><span>ОЦЕНКИ</span><h3>По направлениям</h3></div><Gauge size={22} /></div>
+            <div id="category-scores" class="category-scores"></div>
+          </section>
+          <section class="priority-panel">
+            <div class="section-title"><div><span>ПЛАН РАБОТ</span><h3>Сначала исправьте это</h3></div><Sparkles size={21} /></div>
+            <div id="priority-issues"></div>
+            <button class="show-all" type="button" data-open-tab="issues">Показать все ошибки <ArrowRight size={15} /></button>
+          </section>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab-issues" role="tabpanel" hidden>
+        <div class="issues-toolbar">
+          <div class="issue-filter-stack">
+            <div class="filter-group" aria-label="Фильтр ошибок">
+              <button class="active" data-filter="all">Все</button>
+              <button data-filter="critical">Критичные</button>
+              <button data-filter="high">Высокие</button>
+              <button data-filter="medium">Средние</button>
+              <button data-filter="low">Низкие</button>
+            </div>
+            <div class="advanced-filters">
+              <label><Search size={14} /><input id="issue-search" type="search" placeholder="Найти проблему или URL" /></label>
+              <select id="category-filter" aria-label="Фильтр по категории"><option value="all">Все категории</option><option value="indexing">Индексация</option><option value="onpage">On-page</option><option value="content">Контент</option><option value="links">Ссылки</option><option value="images">Изображения</option><option value="schema">Schema.org</option><option value="performance">Скорость</option><option value="social">Соцсети</option><option value="ai">AI-поиск</option></select>
+              <label class="resolved-toggle"><input id="hide-resolved" type="checkbox" /> Скрыть исправленные</label>
+              <label class="resolved-toggle"><input id="group-issues" type="checkbox" checked /> Группировать</label>
+            </div>
+          </div>
+          <div class="issues-tools"><p id="issues-shown"></p><button type="button" id="download-master-prompt"><Download size={15} /> Скачать общий план .md</button></div>
+        </div>
+        <div class="resolution-progress"><div><ListChecks size={16} /><span id="resolution-label">Исправлено 0 из 0</span></div><i><b id="resolution-bar"></b></i></div>
+        <div class="issues-list" id="issues-list"></div>
+      </div>
+
+      <div class="tab-panel" id="tab-pages" role="tabpanel" hidden>
+        <div class="page-toolbar">
+          <label><Search size={14} /><input id="page-search" type="search" placeholder="Найти URL или title…" /></label>
+          <select id="page-status-filter" aria-label="Фильтр страниц"><option value="all">Все страницы</option><option value="indexable">Индексируемые</option><option value="nonindexable">Не индексируются</option><option value="errors">Ошибки HTTP</option><option value="redirects">Редиректы</option><option value="orphan">Без входящих ссылок</option></select>
+          <select id="page-sort" aria-label="Сортировка страниц"><option value="issues">Сначала проблемные</option><option value="score-asc">SEO: хуже сначала</option><option value="response-desc">Самые медленные</option><option value="depth-desc">Самые глубокие</option><option value="url">По URL</option></select>
+          <span id="pages-shown"></span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>URL / title</th><th>Статус</th><th>Индекс</th><th>Глубина</th><th>Входящие</th><th>SEO</th><th>Контент</th><th>Слова</th><th>Проблемы</th><th></th></tr></thead>
+            <tbody id="pages-table"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="tab-architecture" role="tabpanel" hidden>
+        <div class="architecture-head"><div><span>CRAWL INTELLIGENCE</span><h3>Архитектура и обход сайта</h3><p>Глубина, доступность, индексируемость и вероятные ловушки краулера.</p></div><Network size={28} /></div>
+        <div class="architecture-kpis" id="architecture-kpis"></div>
+        <div class="architecture-layout">
+          <section class="data-section"><div class="section-title"><div><span>HTTP</span><h3>Распределение ответов</h3></div></div><div id="status-matrix" class="status-matrix"></div></section>
+          <section class="data-section"><div class="section-title"><div><span>ГЛУБИНА</span><h3>Уровни от главной</h3></div></div><div id="depth-chart" class="depth-chart"></div></section>
+        </div>
+        <section class="data-section architecture-findings"><div class="section-title"><div><span>ТРЕБУЮТ ВНИМАНИЯ</span><h3>Проблемные URL структуры</h3></div></div><div id="architecture-findings"></div></section>
+        <div class="architecture-layout detail-layout">
+          <section class="data-section"><div class="section-title"><div><span>SITEMAP EXPLORER</span><h3>Карты сайта</h3></div></div><div id="sitemap-report" class="crawl-report-list"></div></section>
+          <section class="data-section"><div class="section-title"><div><span>LINK CHECKER</span><h3>Проверка ссылок</h3></div></div><div id="link-report" class="crawl-report-list"></div></section>
+        </div>
+        <section class="data-section cwv-section"><div class="section-title"><div><span>CORE WEB VITALS</span><h3>Эвристические риски LCP, INP и CLS</h3></div><div class="inline-actions"><select id="pagespeed-strategy" aria-label="Устройство PageSpeed"><option value="mobile">Mobile</option><option value="desktop">Desktop</option></select><button type="button" id="run-pagespeed">Запустить PageSpeed</button></div></div><p class="architecture-note">HTML-эвристика ниже не является полевыми Core Web Vitals. Кнопка PageSpeed запускает отдельный официальный Lighthouse lab-тест выбранной страницы.</p><div id="pagespeed-report" class="pagespeed-report" hidden></div><div class="table-wrap borderless"><table><thead><tr><th>URL</th><th>Ответ</th><th>LCP риск</th><th>INP риск</th><th>CLS риск</th><th>DOM</th><th>Скрипты</th></tr></thead><tbody id="cwv-table"></tbody></table></div></section>
+      </div>
+
+      <div class="tab-panel" id="tab-technical" role="tabpanel" hidden>
+        <div class="technical-grid" id="technical-grid"></div>
+        <section class="data-section robots-tester"><div class="section-title"><div><span>ROBOTS TESTER</span><h3>Проверить URL для поискового робота</h3></div></div><div class="tester-form"><input id="robots-test-url" type="url" placeholder="https://example.com/catalog/page" /><select id="robots-user-agent" aria-label="Поисковый робот"><option value="Googlebot">Googlebot</option><option value="Googlebot-Image">Googlebot-Image</option><option value="Bingbot">Bingbot</option><option value="GPTBot">GPTBot</option><option value="ChatGPT-User">ChatGPT-User</option></select><button type="button" id="test-robots">Проверить</button></div><div id="robots-test-result" class="tester-result">Введите URL текущего сайта.</div></section>
+        <p class="method-note"><strong>Важно:</strong> SiteScan анализирует HTML и серверные сигналы. Оценка скорости здесь — диагностическая подсказка, а не замена полевым данным Core Web Vitals из Search Console.</p>
+      </div>
+
+      <div class="tab-panel" id="tab-tools" role="tabpanel" hidden>
+        <div class="tools-hero"><div><span>PRODUCT LAB</span><h3>Рабочая зона SEO-специалиста</h3><p>Тринадцать инструментов поверх краулинга: от карты интентов и логов до контроля исправлений.</p></div><Braces size={30} /></div>
+        <div class="tool-kpis" id="tool-kpis"></div>
+        <div class="tools-grid">
+          <section class="tool-card tool-card-wide"><div class="section-title"><div><span>CHANGE TRACKING</span><h3>Что изменилось между аудитами</h3></div><button type="button" id="verify-fixes">Проверить исправления</button></div><div id="change-report" class="tool-output"></div></section>
+          <section class="tool-card"><div class="section-title"><div><span>KEYWORD CLUSTERS</span><h3>Кластеры тем и интенты</h3></div></div><div id="keyword-clusters" class="tool-output"></div></section>
+          <section class="tool-card tool-card-wide"><div class="section-title"><div><span>INTENT MAP</span><h3>Карта интентов и каннибализация</h3></div></div><p class="tool-note">SiteScan назначает вероятную целевую страницу для каждого заданного ключа. Решение нужно подтвердить Wordstat, Search Console и ручной проверкой выдачи.</p><div id="intent-map" class="tool-output"></div></section>
+          <section class="tool-card"><div class="section-title"><div><span>SCHEMA INSPECTOR</span><h3>Разметка по страницам</h3></div></div><div id="schema-inventory" class="tool-output"></div></section>
+          <section class="tool-card tool-card-wide"><div class="section-title"><div><span>INTERNAL LINKS</span><h3>Карта и новые связи</h3></div></div><svg id="link-graph" class="link-graph" viewBox="0 0 760 330" role="img" aria-label="Граф внутренних ссылок"></svg><div id="link-opportunities" class="tool-output"></div></section>
+          <section class="tool-card"><div class="section-title"><div><span>ACCESSIBILITY</span><h3>Доступность контента</h3></div></div><div id="accessibility-report" class="tool-output"></div></section>
+          <section class="tool-card"><div class="section-title"><div><span>CONTENT GAP</span><h3>Сравнение с конкурентом</h3></div><label class="file-action">Импорт JSON<input id="competitor-import" type="file" accept=".json,application/json" /></label></div><p class="tool-note">Загрузите JSON-отчёт SiteScan конкурента.</p><div id="content-gap-report" class="tool-output"><p class="empty-state">Отчёт конкурента ещё не загружен.</p></div></section>
+          <section class="tool-card"><div class="section-title"><div><span>CUSTOM RULES</span><h3>Собственные проверки</h3></div></div><textarea id="custom-rules" class="rule-editor" spellcheck="false" aria-label="Пользовательские правила">titleLength &gt;= 30
+descriptionLength &gt;= 70
+wordCount &gt;= 300
+imagesMissingAlt = 0
+indexable = true</textarea><button type="button" id="run-custom-rules">Запустить правила</button><div id="custom-rules-report" class="tool-output"></div></section>
+          <section class="tool-card"><div class="section-title"><div><span>SERVER LOGS</span><h3>Поисковые роботы в логах</h3></div><label class="file-action">Импорт лога<input id="log-import" type="file" accept=".log,.txt,.csv,text/plain,text/csv" /></label></div><p class="tool-note">Common/Combined access log, до 20 МБ. Обрабатывается локально.</p><div id="log-report" class="tool-output"><p class="empty-state">Лог ещё не загружен.</p></div></section>
+          <section class="tool-card"><div class="section-title"><div><span>RENDERED HTML</span><h3>Исходный и отрисованный DOM</h3></div></div><select id="rendered-page" class="tool-select" aria-label="Страница для сравнения"></select><label class="file-drop">Загрузить сохранённый HTML после выполнения JavaScript<input id="rendered-import" type="file" accept=".html,.htm,text/html" /></label><p class="tool-note">Сохраните отрисованный DOM в DevTools. SiteScan сравнит title, H1, canonical, robots, текст и ссылки.</p><div id="rendered-report" class="tool-output"></div></section>
+          <section class="tool-card"><div class="section-title"><div><span>MONITORING</span><h3>Контроль по расписанию</h3></div></div><div class="monitor-controls"><select id="monitor-interval" class="tool-select" aria-label="Интервал мониторинга"><option value="15">каждые 15 минут</option><option value="60">каждый час</option><option value="360">каждые 6 часов</option><option value="1440">раз в сутки</option></select><button type="button" id="monitor-toggle">Включить</button></div><p class="tool-note">Локальный режим работает, пока эта вкладка SiteScan открыта.</p><div id="monitor-status" class="monitor-status">Мониторинг выключен.</div></section>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="brand"><span class="brand-mark"><Activity size={16} /></span><span>SITE<span>SCAN</span></span></div>
+    <p>Локальный SEO-аудитор. Без аккаунтов и трекеров. История хранится только в вашем браузере.</p>
+    <span>v2.0</span>
+  </footer>
+  <div class="copy-toast" id="copy-toast" role="status" aria-live="polite" hidden>Промпт скопирован</div>
+  <dialog class="page-dialog" id="page-dialog">
+    <div class="dialog-head"><div><span>ДЕТАЛИ СТРАНИЦЫ</span><h2 id="dialog-title">Страница</h2></div><button type="button" id="close-dialog" aria-label="Закрыть"><X size={20} /></button></div>
+    <div id="page-dialog-content"></div>
+  </dialog>
+</div>
+
+<script>
+  import type { AuditIssue, AuditProgress, AuditReport, ContentAnalysis, PageAudit, SearchConsoleRow } from '../lib/types';
+  import { buildGroupedIssuePrompt, buildMasterAuditPrompt, groupAuditIssues } from '../lib/issue-planning';
+
+  const $ = <T extends HTMLElement>(selector: string) => document.querySelector<T>(selector)!;
+  const form = $('#audit-form') as HTMLFormElement;
+  const loading = $('#loading-panel');
+  const results = $('#results');
+  const errorPanel = $('#error-panel');
+  const input = $('#site-url') as HTMLInputElement;
+  const limit = $('#crawl-limit') as HTMLSelectElement;
+  const keywordInput = $('#target-keywords') as HTMLInputElement;
+  let currentReport: AuditReport | null = null;
+  let progressTimer: number | undefined;
+  let activeController: AbortController | null = null;
+  let severityFilter = 'all';
+  let issueQuery = '';
+  let categoryFilter = 'all';
+  let hideResolved = false;
+  let groupIssues = true;
+  let pageQuery = '';
+  let pageStatusFilter = 'all';
+  let pageSort = 'issues';
+  let resolvedIssues = new Set<string>();
+  let historyExpanded = false;
+  let monitorTimer: number | undefined;
+  let customRulePrompts: string[] = [];
+  const historyKey = 'sitescan:audit-history:v1';
+  type ReportSummary = Pick<AuditReport, 'id' | 'url' | 'origin' | 'createdAt' | 'score' | 'grade' | 'pagesScanned' | 'totals' | 'categoryScores'>;
+
+  const categoryLabels: Record<string, string> = { indexing: 'Индексация', onpage: 'On-page SEO', content: 'Контент', links: 'Внутренние ссылки', images: 'Изображения', schema: 'Schema.org', performance: 'Скорость и UX', social: 'Соцсети', ai: 'AI-поиск' };
+  const severityLabels: Record<string, string> = { critical: 'Критично', high: 'Высокий', medium: 'Средний', low: 'Низкий' };
+  const escapeHtml = (value: unknown) => String(value ?? '').replace(/[&<>'"]/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[char]!);
+  const shortUrl = (value: string) => { try { const url = new URL(value); return url.pathname === '/' ? url.hostname : `${url.hostname}${url.pathname}`; } catch { return value; } };
+  const scoreTone = (score: number) => score >= 80 ? 'good' : score >= 60 ? 'warn' : 'bad';
+  const contentFor = (page: PageAudit): ContentAnalysis => page.contentAnalysis || { score: page.contentScore, pageType: 'landing', searchIntent: 'mixed', minimumWords: 600, grade: page.contentScore >= 75 ? 'B' : page.contentScore >= 60 ? 'C' : 'D', readingTime: Math.max(1, Math.ceil(page.wordCount / 200)), sentenceCount: 0, averageSentenceWords: 0, longSentencePercent: 0, primaryTopic: page.h1[0] || page.title, firstParagraph: '', outline: page.h1.map((heading) => `H1: ${heading}`), ctaFound: false, sourceLinks: page.externalLinks, factsAndNumbers: 0, repetitionRisk: 0, dimensions: { intent: page.score, depth: page.contentScore, structure: page.contentScore, readability: page.readabilityScore, originality: 70, experience: page.authorFound ? 65 : 35, expertise: page.authorFound ? 65 : 40, trust: Math.round(page.trustSignals / 6 * 100), keywordUse: 70, aiReadiness: page.aiCitationScore }, strengths: [], weaknesses: [], recommendations: ['Повторите аудит, чтобы получить новую расширенную модель контента.'], checks: [], codexPrompt: `Повтори SEO-аудит страницы ${page.url}, чтобы получить расширенный промпт исправления контента.` };
+  const issueFingerprint = (item: AuditIssue) => `${item.title}|${item.url || ''}`;
+  const resolvedKey = (report: AuditReport) => `sitescan:resolved:${new URL(report.origin).hostname}`;
+  const readHistory = (): ReportSummary[] => { try { return JSON.parse(localStorage.getItem(historyKey) || '[]'); } catch { return []; } };
+  const reportSummary = (report: AuditReport): ReportSummary => ({ id: report.id, url: report.url, origin: report.origin, createdAt: report.createdAt, score: report.score, grade: report.grade, pagesScanned: report.pagesScanned, totals: report.totals, categoryScores: report.categoryScores });
+  const formatDate = (value: string) => new Intl.DateTimeFormat('ru-RU', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' }).format(new Date(value));
+  const reportDb = () => new Promise<IDBDatabase>((resolve, reject) => {
+    const request = indexedDB.open('sitescan-reports', 1);
+    request.onupgradeneeded = () => { if (!request.result.objectStoreNames.contains('reports')) request.result.createObjectStore('reports', { keyPath: 'id' }); };
+    request.onsuccess = () => resolve(request.result); request.onerror = () => reject(request.error);
+  });
+  async function saveFullReport(report: AuditReport) { const db = await reportDb(); await new Promise<void>((resolve, reject) => { const transaction = db.transaction('reports', 'readwrite'); transaction.objectStore('reports').put(report); transaction.oncomplete = () => resolve(); transaction.onerror = () => reject(transaction.error); transaction.onabort = () => reject(transaction.error); }); db.close(); }
+  async function loadFullReport(id: string) { const db = await reportDb(); return new Promise<AuditReport | null>((resolve) => { const request = db.transaction('reports').objectStore('reports').get(id); request.onsuccess = () => { resolve(request.result || null); db.close(); }; request.onerror = () => { resolve(null); db.close(); }; }); }
+  async function clearFullReports() { const db = await reportDb(); const transaction = db.transaction('reports', 'readwrite'); transaction.objectStore('reports').clear(); transaction.oncomplete = () => db.close(); }
+
+  function showLoading() {
+    results.hidden = true; errorPanel.hidden = true; loading.hidden = false;
+    loading.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    $('#progress-bar').style.width = '5%';
+    $('#loading-title').textContent = 'Подключаемся к сайту…';
+    $('#loading-message').textContent = 'Проверяем адрес, robots.txt и карты сайта.';
+    $('#loading-metrics').textContent = 'Подготовка сканера…';
+  }
+
+  function updateLiveProgress(progress: AuditProgress) {
+    const phaseStart: Record<AuditProgress['phase'], number> = { prepare: 6, sitemaps: 16, crawl: 30, links: 68, analyze: 94, complete: 100 };
+    let percent = phaseStart[progress.phase];
+    if (progress.phase === 'crawl') percent += Math.min(35, progress.crawled / Math.max(1, Number(limit.value)) * 35);
+    if (progress.phase === 'links') percent += Math.min(22, progress.checkedLinks / Math.max(1, progress.totalLinks) * 22);
+    $('#progress-bar').style.width = `${Math.min(100, percent)}%`;
+    $('#loading-title').textContent = progress.phase === 'sitemaps' ? 'Читаем карты сайта…' : progress.phase === 'crawl' ? 'Сканируем страницы…' : progress.phase === 'links' ? 'Проверяем ссылки…' : progress.phase === 'analyze' ? 'Собираем отчёт…' : progress.message;
+    $('#loading-message').textContent = progress.currentUrl ? shortUrl(progress.currentUrl) : progress.message;
+    $('#loading-metrics').textContent = `${progress.crawled} страниц · ${progress.discovered} URL найдено · ${progress.checkedLinks}/${progress.totalLinks} ссылок`;
+    const phaseIndex = { prepare: 0, sitemaps: 0, crawl: 1, links: 2, analyze: 3, complete: 3 }[progress.phase];
+    document.querySelectorAll<HTMLElement>('.loading-steps span').forEach((step, index) => step.classList.toggle('active', index <= phaseIndex));
+  }
+
+  function stopLoading() {
+    window.clearInterval(progressTimer);
+    $('#progress-bar').style.width = '100%';
+    window.setTimeout(() => { loading.hidden = true; }, 180);
+  }
+
+  async function run(payload: { url?: string; limit?: number; keywords?: string; demo?: boolean }) {
+    activeController?.abort();
+    const controller = new AbortController();
+    activeController = controller;
+    showLoading();
+    try {
+      const endpoint = payload.demo ? '/api/audit' : '/api/audit-stream';
+      const response = await fetch(endpoint, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(payload), signal: controller.signal });
+      if (!response.ok) { const data = await response.json().catch(() => ({})); throw new Error(data.error || 'Не удалось выполнить аудит'); }
+      let report: AuditReport | null = null;
+      if (payload.demo) report = await response.json() as AuditReport;
+      else {
+        const reader = response.body?.getReader(); if (!reader) throw new Error('Браузер не поддерживает потоковый отчёт');
+        const decoder = new TextDecoder(); let buffer = '';
+        while (true) {
+          const { value, done } = await reader.read(); buffer += decoder.decode(value || new Uint8Array(), { stream: !done });
+          const lines = buffer.split('\n'); buffer = lines.pop() || '';
+          for (const line of lines.filter(Boolean)) {
+            const event = JSON.parse(line);
+            if (event.type === 'progress') updateLiveProgress(event.progress as AuditProgress);
+            if (event.type === 'report') report = event.report as AuditReport;
+            if (event.type === 'error') throw new Error(event.error || 'Не удалось выполнить аудит');
+          }
+          if (done) break;
+        }
+        if (buffer.trim()) {
+          const event = JSON.parse(buffer);
+          if (event.type === 'progress') updateLiveProgress(event.progress as AuditProgress);
+          if (event.type === 'report') report = event.report as AuditReport;
+          if (event.type === 'error') throw new Error(event.error || 'Не удалось выполнить аудит');
+        }
+      }
+      if (!report) throw new Error('Сервер не вернул отчёт');
+      currentReport = report;
+      renderReport(currentReport);
+      stopLoading();
+      window.setTimeout(() => { results.hidden = false; results.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 190);
+    } catch (error) {
+      stopLoading();
+      if (error instanceof DOMException && error.name === 'AbortError') return;
+      $('#error-message').textContent = error instanceof Error ? error.message : 'Неизвестная ошибка';
+      errorPanel.hidden = false;
+      errorPanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } finally { if (activeController === controller) activeController = null; }
+  }
+
+  function issueMarkup(item: AuditIssue, compact = false, group: AuditIssue[] = [item]) {
+    const resolved = group.every((issue) => resolvedIssues.has(issueFingerprint(issue)));
+    const groupIds = encodeURIComponent(group.map((issue) => issue.id).join(','));
+    return `<article class="issue-row ${escapeHtml(item.severity)} ${resolved ? 'resolved' : ''}">
+      <div class="severity-mark" aria-hidden="true"></div>
+      <div class="issue-copy">
+        ${compact ? '' : `<label class="issue-resolved"><input type="checkbox" ${group.length > 1 ? `data-resolve-group="${groupIds}"` : `data-resolve-issue="${escapeHtml(item.id)}"`} ${resolved ? 'checked' : ''} /><span>${resolved ? 'Исправлено' : 'Отметить исправленным'}</span></label>`}
+        <div class="issue-meta"><span>${escapeHtml(severityLabels[item.severity])}</span><span>${escapeHtml(categoryLabels[item.category])}</span>${group.length > 1 ? `<span>${group.length} URL</span>` : ''}</div>
+        <h4>${escapeHtml(item.title)}</h4>
+        <p>${escapeHtml(item.description)}</p>
+        ${compact ? '' : `<div class="recommendation"><strong>Как исправить</strong><p>${escapeHtml(item.recommendation)}</p></div>
+          <details class="solution-details"><summary>Пошаговое решение и промпт для Codex</summary>
+            <div class="solution-body"><ol>${item.solutionSteps.map((step) => `<li>${escapeHtml(step)}</li>`).join('')}</ol>
+            <div class="codex-prompt"><div><strong>${group.length > 1 ? 'Один промпт для всей группы' : 'Готовый промпт'}</strong><button type="button" ${group.length > 1 ? `data-copy-issue-group="${groupIds}"` : `data-copy-issue="${escapeHtml(item.id)}"`}>Скопировать</button></div><pre>${escapeHtml(group.length > 1 ? buildGroupedIssuePrompt(group, currentReport?.url) : item.codexPrompt)}</pre></div></div>
+          </details>`}
+        ${group.length > 1 ? `<details class="affected-urls"><summary>Затронутые страницы (${group.length})</summary>${group.slice(0, 30).map((issue) => issue.url ? `<a href="${escapeHtml(issue.url)}" target="_blank" rel="noreferrer">${escapeHtml(shortUrl(issue.url))}</a>` : '').join('')}</details>` : item.url ? `<a href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">${escapeHtml(shortUrl(item.url))}</a>` : ''}
+      </div>
+    </article>`;
+  }
+
+  function renderReport(report: AuditReport) {
+    try { resolvedIssues = new Set(JSON.parse(localStorage.getItem(resolvedKey(report)) || '[]')); } catch { resolvedIssues = new Set(); }
+    const previous = readHistory().find((item) => item.origin === report.origin && item.id !== report.id);
+    saveHistory(report);
+    renderHistory();
+    renderComparison(report, previous);
+    $('#report-url').textContent = report.url;
+    $('#score-value').textContent = String(report.score);
+    $('#score-grade').textContent = report.grade;
+    $('#score-label').textContent = report.score >= 85 ? 'Сайт в хорошем состоянии' : report.score >= 65 ? 'Есть заметный потенциал' : report.score >= 45 ? 'Нужны системные исправления' : 'SEO требует срочного внимания';
+    $('#score-summary').textContent = report.score >= 75 ? 'Основа настроена. Сосредоточьтесь на задачах с высоким приоритетом.' : 'Начните с индексации и критичных технических ошибок — они сильнее всего мешают росту.';
+    const ring = $('#score-ring');
+    ring.style.setProperty('--score', String(report.score));
+    ring.dataset.tone = scoreTone(report.score);
+    $('#pages-count').textContent = String(report.pagesScanned);
+    $('#critical-count').textContent = String(report.totals.critical);
+    $('#high-count').textContent = String(report.totals.high);
+    $('#duration-value').textContent = (report.duration / 1000).toFixed(1);
+    $('#issues-badge').textContent = String(report.totals.issues);
+    $('#category-scores').innerHTML = Object.entries(report.categoryScores).map(([key, score]) => `<div class="category-row">
+      <div><span>${escapeHtml(categoryLabels[key])}</span><strong>${score}</strong></div>
+      <div class="score-track"><i class="${scoreTone(score)}" style="width:${score}%"></i></div>
+    </div>`).join('');
+    $('#priority-issues').innerHTML = report.issues.slice(0, 4).map((item) => issueMarkup(item, true)).join('') || '<p class="empty-state">Критичных проблем не найдено.</p>';
+    const state = new URLSearchParams(window.location.search);
+    severityFilter = state.get('severity') || 'all'; issueQuery = state.get('q') || ''; categoryFilter = state.get('category') || 'all'; hideResolved = state.get('resolved') === 'hide'; groupIssues = state.get('group') !== 'off';
+    document.querySelectorAll<HTMLElement>('[data-filter]').forEach((item) => item.classList.toggle('active', item.dataset.filter === severityFilter));
+    const search = $('#issue-search') as HTMLInputElement; if (search) search.value = issueQuery;
+    const category = $('#category-filter') as HTMLSelectElement; if (category) category.value = categoryFilter;
+    const hidden = $('#hide-resolved') as HTMLInputElement; if (hidden) hidden.checked = hideResolved;
+    const grouped = $('#group-issues') as HTMLInputElement; if (grouped) grouped.checked = groupIssues;
+    renderIssues();
+    pageQuery = state.get('pageQ') || ''; pageStatusFilter = state.get('pageStatus') || 'all'; pageSort = state.get('pageSort') || 'issues';
+    ($('#page-search') as HTMLInputElement).value = pageQuery; ($('#page-status-filter') as HTMLSelectElement).value = pageStatusFilter; ($('#page-sort') as HTMLSelectElement).value = pageSort;
+    renderPages(report);
+    renderContent(report);
+    renderArchitecture(report);
+    void renderProductTools(report, previous);
+    const requestedTab = new URLSearchParams(window.location.search).get('tab');
+    openTab(['overview','issues','content','pages','architecture','technical','tools'].includes(requestedTab || '') ? requestedTab! : 'overview', false);
+    const tech: Array<[string, boolean | null, string]> = [
+      ['HTTPS', report.technical.https, report.technical.https ? 'Подключение защищено' : 'Используется HTTP'],
+      ['robots.txt', report.technical.robotsFound, `HTTP ${report.technical.robotsStatus || 'ERR'}`],
+      ['sitemap.xml', report.technical.sitemapFound, `HTTP ${report.technical.sitemapStatus || 'ERR'}`],
+      ['llms.txt', null, report.technical.llmsFound ? 'Файл найден; Google Search его не использует' : 'Необязательный файл; отсутствие не влияет на Google Search'],
+      ['Обнаружено URL', report.crawl.discovered > 0, `${report.crawl.discovered} адресов, проверено ${report.crawl.crawled}`],
+      ['URL в Sitemap', report.crawl.sitemapUrls > 0, report.crawl.sitemapUrls ? `${report.crawl.sitemapUrls} адресов` : 'Карта не содержит URL'],
+      ['Битые внутренние ссылки', report.crawl.brokenInternal === 0, report.crawl.brokenInternal ? `Найдено: ${report.crawl.brokenInternal}` : 'Не найдено среди проверенных страниц'],
+      ['Закрыто robots.txt', report.crawl.blockedByRobots === 0, report.crawl.blockedByRobots ? `Пропущено URL: ${report.crawl.blockedByRobots}` : 'Обход не ограничен'],
+      ...Object.entries(report.technical.securityHeaders).map(([key, value]) => [key, value, value ? 'Заголовок настроен' : 'Заголовок не найден'] as [string, boolean, string]),
+    ];
+    $('#technical-grid').innerHTML = tech.map(([name, ok, detail]) => `<div class="tech-row"><span class="tech-icon ${ok === null ? 'info' : ok ? 'ok' : 'missing'}">${ok === null ? 'i' : ok ? '✓' : '—'}</span><div><strong>${escapeHtml(name)}</strong><p>${escapeHtml(detail)}</p></div><span>${ok === null ? 'Инфо' : ok ? 'OK' : 'Проверить'}</span></div>`).join('');
+    ($('#robots-test-url') as HTMLInputElement).value = report.url;
+    $('#robots-test-result').className = 'tester-result'; $('#robots-test-result').textContent = 'Выберите робота и проверьте URL.';
+    $('#pagespeed-report').hidden = true; $('#pagespeed-report').innerHTML = '';
+  }
+
+  function saveHistory(report: AuditReport) {
+    const next = [reportSummary(report), ...readHistory().filter((item) => item.id !== report.id)].slice(0, 10);
+    localStorage.setItem(historyKey, JSON.stringify(next));
+    saveFullReport(report).catch(() => { /* compact history remains available */ });
+  }
+
+  function renderHistory() {
+    const history = readHistory();
+    const panel = $('#history-panel');
+    panel.hidden = history.length === 0;
+    const visible = historyExpanded ? history : history.slice(0, 3);
+    const toggle = $('#history-toggle') as HTMLButtonElement; toggle.hidden = history.length <= 3; toggle.textContent = historyExpanded ? 'Свернуть' : `Показать все (${history.length})`;
+    $('#history-list').innerHTML = visible.map((item, index) => {
+      const previous = history.slice(index + 1).find((candidate) => candidate.origin === item.origin);
+      const delta = previous ? item.score - previous.score : null;
+      return `<article><div class="history-score ${scoreTone(item.score)}">${item.score}</div><div><strong>${escapeHtml(new URL(item.url).hostname)}</strong><p>${formatDate(item.createdAt)} · ${item.pagesScanned} стр. · ${item.totals.issues} ошибок</p></div>${delta == null ? '<span class="history-delta">первый</span>' : `<span class="history-delta ${delta >= 0 ? 'up' : 'down'}">${delta >= 0 ? '+' : ''}${delta}</span>`}<div class="history-row-actions"><button type="button" data-open-report="${escapeHtml(item.id)}">Открыть</button><button type="button" data-rerun-url="${escapeHtml(item.url)}">↻ Повторить</button></div></article>`;
+    }).join('');
+  }
+
+  function renderComparison(report: AuditReport, previous?: ReportSummary) {
+    const panel = $('#comparison-strip');
+    panel.hidden = !previous;
+    if (!previous) return;
+    $('#comparison-date').textContent = `предыдущий: ${formatDate(previous.createdAt)}`;
+    const deltaMarkup = (value: number, inverse = false) => `<span class="delta-value ${(inverse ? value <= 0 : value >= 0) ? 'positive' : 'negative'}">${value > 0 ? '+' : ''}${value}</span>`;
+    $('#compare-score').innerHTML = deltaMarkup(report.score - previous.score);
+    $('#compare-issues').innerHTML = deltaMarkup(report.totals.issues - previous.totals.issues, true);
+    $('#compare-critical').innerHTML = deltaMarkup(report.totals.critical - previous.totals.critical, true);
+    $('#compare-pages').innerHTML = deltaMarkup(report.pagesScanned - previous.pagesScanned);
+  }
+
+  function renderContent(report: AuditReport) {
+    const summary = report.contentSummary;
+    const dimensionLabels: Record<keyof ContentAnalysis['dimensions'], string> = { intent: 'Интент', depth: 'Полнота', structure: 'Структура', readability: 'Читаемость', originality: 'Уникальность', experience: 'Опыт', expertise: 'Экспертность', trust: 'Доверие', keywordUse: 'Ключевые фразы', aiReadiness: 'AI-цитирование' };
+    const dimensions = summary.averageDimensions || Object.fromEntries((Object.keys(dimensionLabels) as Array<keyof ContentAnalysis['dimensions']>).map((key) => [key, Math.round(report.pages.reduce((sum, page) => sum + contentFor(page).dimensions[key], 0) / Math.max(1, report.pages.length))])) as ContentAnalysis['dimensions'];
+    $('#content-kpis').innerHTML = [
+      ['Качество контента', summary.averageContentScore, 'средняя оценка'],
+      ['Читабельность', summary.averageReadability, 'эвристика 0–100'],
+      ['AI-цитируемость', summary.averageAiCitationScore, 'структура и доказательства'],
+      ['Тонкие страницы', summary.thinPages, `из ${report.pagesScanned}`],
+    ].map(([label, value, detail]) => `<div><span>${escapeHtml(label)}</span><strong class="${typeof value === 'number' && label !== 'Тонкие страницы' ? scoreTone(value) : ''}">${value}</strong><small>${escapeHtml(detail)}</small></div>`).join('');
+
+    $('#content-dimensions').innerHTML = (Object.entries(dimensions) as Array<[keyof ContentAnalysis['dimensions'], number]>).map(([key, value]) => `<div><div><span>${escapeHtml(dimensionLabels[key])}</span><strong class="${scoreTone(value)}">${value}</strong></div><i><b class="${scoreTone(value)}" style="width:${value}%"></b></i></div>`).join('');
+    const weakIntent = summary.weakIntentPages ?? report.pages.filter((page) => contentFor(page).dimensions.intent < 60).length; const lowExperience = summary.lowExperiencePages ?? report.pages.filter((page) => contentFor(page).dimensions.experience < 55).length; const repetition = summary.highRepetitionPages ?? report.pages.filter((page) => contentFor(page).repetitionRisk >= 45).length;
+    $('#content-risks').innerHTML = `<div><strong>${weakIntent}</strong><span>страниц со слабым интентом</span></div><div><strong>${lowExperience}</strong><span>без убедительного опыта</span></div><div><strong>${repetition}</strong><span>с риском повторов</span></div><div><strong>${report.pages.filter((page) => contentFor(page).dimensions.expertise < 55).length}</strong><span>со слабой экспертностью</span></div>`;
+
+    $('#keyword-report').innerHTML = report.keywordSummary.length ? `<div class="keyword-table">
+      <div class="keyword-head"><span>Фраза</span><span>Вхождения</span><span>Страницы</span><span>Плотность</span><span>Title</span><span>H1</span></div>
+      ${report.keywordSummary.map((item) => `<div class="keyword-line"><strong>${escapeHtml(item.keyword)}</strong><span>${item.totalCount}</span><span>${item.pageCoverage}%</span><span>${item.averageDensity}%</span><span>${item.titleCoverage}%</span><span>${item.h1Coverage}%</span></div>`).join('')}
+    </div>` : '<div class="empty-keywords"><strong>Целевые фразы не заданы</strong><p>Запустите новый аудит и укажите до 10 ключей — SiteScan проверит вхождения, плотность, title, description, H1, URL и первые 100 слов.</p></div>';
+    $('#top-terms').innerHTML = report.topTerms.map((item, index) => `<div class="term-row"><span>${String(index + 1).padStart(2, '0')}</span><strong>${escapeHtml(item.term)}</strong><i><b style="width:${Math.min(100, item.density * 28)}%"></b></i><small>${item.count} · ${item.density}% · ${item.pages} стр.</small></div>`).join('') || '<p class="empty-state">Недостаточно текста для анализа.</p>';
+    $('#content-pages-table').innerHTML = report.pages.map((page, index) => { const analysis = contentFor(page); const passed = analysis.checks.filter((check) => check.passed).length; return `<tr><td><a href="${escapeHtml(page.url)}" target="_blank" rel="noreferrer">${escapeHtml(shortUrl(page.url))}</a><small>${escapeHtml(analysis.pageType)} · ${escapeHtml(analysis.searchIntent)}</small></td><td><strong class="table-score ${scoreTone(analysis.score)}">${analysis.score} · ${analysis.grade}</strong></td><td>${analysis.dimensions.intent}</td><td>${analysis.dimensions.depth}</td><td>${analysis.dimensions.experience}</td><td>${analysis.dimensions.expertise}</td><td>${analysis.dimensions.trust}</td><td>${analysis.dimensions.aiReadiness}</td><td><span class="check-ratio ${passed === analysis.checks.length ? 'complete' : ''}">${passed}/${analysis.checks.length || '—'}</span></td><td>${page.wordCount}</td><td><button class="page-detail-button" type="button" data-content-page="${index}">Разбор + промпты</button></td></tr>`; }).join('');
+    const duplicateItems = [
+      ...report.duplicates.titles.map((item) => ({ label: 'Title', item })),
+      ...report.duplicates.descriptions.map((item) => ({ label: 'Description', item })),
+      ...report.duplicates.h1.map((item) => ({ label: 'H1', item })),
+      ...report.duplicates.content.map((item) => ({ label: 'Контент', item })),
+    ];
+    $('#duplicate-report').innerHTML = duplicateItems.length ? duplicateItems.slice(0, 12).map(({ label, item }) => `<div><span>${label}</span><p><strong>${escapeHtml(item.value)}</strong><small>${item.urls.length} страниц</small></p></div>`).join('') : '<p class="empty-state">Межстраничных дублей не найдено.</p>';
+    $('#anchor-report').innerHTML = report.anchorTexts.length ? report.anchorTexts.slice(0, 12).map((item) => `<div><span>${item.count}</span><p><strong>${escapeHtml(item.text)}</strong><small>ведёт на ${item.targets} URL</small></p></div>`).join('') : '<p class="empty-state">Внутренние анкоры не найдены.</p>';
+    renderSearchConsole(report.searchConsole || []);
+  }
+
+  function renderSearchConsole(rows: SearchConsoleRow[]) {
+    if (!rows.length) { $('#gsc-report').innerHTML = '<p class="empty-state">CSV ещё не загружен.</p>'; return; }
+    const opportunities = [...rows].sort((a, b) => (b.impressions * (1 - Math.min(1, b.ctr))) - (a.impressions * (1 - Math.min(1, a.ctr)))).slice(0, 30);
+    const clicks = rows.reduce((sum, row) => sum + row.clicks, 0); const impressions = rows.reduce((sum, row) => sum + row.impressions, 0);
+    $('#gsc-report').innerHTML = `<div class="import-summary"><div><strong>${Math.round(clicks)}</strong><span>кликов</span></div><div><strong>${Math.round(impressions)}</strong><span>показов</span></div><div><strong>${impressions ? (clicks / impressions * 100).toFixed(2) : 0}%</strong><span>CTR</span></div><div><strong>${rows.length}</strong><span>строк</span></div></div><div class="table-wrap borderless"><table><thead><tr><th>Страница / запрос</th><th>Клики</th><th>Показы</th><th>CTR</th><th>Позиция</th><th>Возможность</th></tr></thead><tbody>${opportunities.map((row) => `<tr><td><strong>${escapeHtml(row.key)}</strong></td><td>${row.clicks}</td><td>${row.impressions}</td><td>${(row.ctr * 100).toFixed(2)}%</td><td>${row.position.toFixed(1)}</td><td>${row.impressions >= 100 && row.ctr < .03 ? '<span class="risk-level medium">Высокие показы, низкий CTR</span>' : row.position > 4 && row.position <= 20 ? '<span class="risk-level">Близко к топу</span>' : '—'}</td></tr>`).join('')}</tbody></table></div>`;
+  }
+
+  function parseCsv(text: string): string[][] {
+    const delimiter = [';', ',', '\t'].sort((a, b) => (text.split('\n')[0]?.split(b).length || 0) - (text.split('\n')[0]?.split(a).length || 0))[0]!;
+    const rows: string[][] = []; let row: string[] = []; let cell = ''; let quoted = false;
+    for (let index = 0; index < text.length; index++) { const char = text[index]!; const next = text[index + 1];
+      if (char === '"' && quoted && next === '"') { cell += '"'; index++; }
+      else if (char === '"') quoted = !quoted;
+      else if (char === delimiter && !quoted) { row.push(cell.trim()); cell = ''; }
+      else if ((char === '\n' || char === '\r') && !quoted) { if (char === '\r' && next === '\n') index++; row.push(cell.trim()); if (row.some(Boolean)) rows.push(row); row = []; cell = ''; }
+      else cell += char;
+    }
+    row.push(cell.trim()); if (row.some(Boolean)) rows.push(row); return rows;
+  }
+
+  function mapSearchConsoleCsv(text: string): SearchConsoleRow[] {
+    const rows = parseCsv(text.replace(/^\uFEFF/, '')); if (rows.length < 2) throw new Error('CSV не содержит строк данных');
+    const headers = rows[0]!.map((value) => value.toLowerCase().replace(/\s+/g, ' ').trim());
+    const find = (...names: string[]) => headers.findIndex((header) => names.some((name) => header === name || header.includes(name)));
+    const keyIndex = find('страница', 'page', 'запрос', 'query'); const clicksIndex = find('клики', 'clicks'); const impressionsIndex = find('показы', 'impressions'); const ctrIndex = find('ctr'); const positionIndex = find('позиция', 'position');
+    if ([keyIndex, clicksIndex, impressionsIndex, ctrIndex, positionIndex].some((index) => index < 0)) throw new Error('Нужны колонки: Страница/Запрос, Клики, Показы, CTR и Позиция');
+    const number = (value = '') => Number(value.replace(/\s/g, '').replace('%', '').replace(',', '.')) || 0;
+    return rows.slice(1).map((cells) => { const ctrRaw = cells[ctrIndex] || ''; const ctr = number(ctrRaw); return { key: cells[keyIndex] || '', clicks: number(cells[clicksIndex]), impressions: number(cells[impressionsIndex]), ctr: ctrRaw.includes('%') || ctr > 1 ? ctr / 100 : ctr, position: number(cells[positionIndex]) }; }).filter((row) => row.key).slice(0, 10_000);
+  }
+
+  function testRobots(text: string, url: URL, userAgent: string) {
+    if (!text.trim()) return { allowed: true, rule: 'robots.txt отсутствует или пуст' };
+    type Group = { agents: string[]; rules: Array<{ allow: boolean; pattern: string }> };
+    const groups: Group[] = []; let group: Group | null = null; let hasRules = false;
+    for (const raw of text.split(/\r?\n/)) {
+      const line = raw.replace(/#.*$/, '').trim(); if (!line || !line.includes(':')) continue;
+      const [rawKey, ...parts] = line.split(':'); const key = rawKey!.trim().toLowerCase(); const value = parts.join(':').trim();
+      if (key === 'user-agent') { if (!group || hasRules) { group = { agents: [], rules: [] }; groups.push(group); hasRules = false; } group.agents.push(value.toLowerCase()); }
+      if ((key === 'allow' || key === 'disallow') && group) { hasRules = true; if (value) group.rules.push({ allow: key === 'allow', pattern: value }); }
+    }
+    const agent = userAgent.toLowerCase(); const matching = groups.filter((item) => item.agents.some((value) => value === '*' || agent.includes(value))).map((item) => ({ item, specificity: Math.max(...item.agents.filter((value) => value === '*' || agent.includes(value)).map((value) => value === '*' ? 0 : value.length)) }));
+    const specificity = Math.max(-1, ...matching.map((item) => item.specificity)); const rules = matching.filter((item) => item.specificity === specificity).flatMap((item) => item.item.rules);
+    const path = `${url.pathname}${url.search}`; const escapeRegex = (value: string) => value.replace(/[.+?^${}()|[\]\\]/g, '\\$&').replace(/\*/g, '.*');
+    const matches = rules.filter((rule) => new RegExp(`^${escapeRegex(rule.pattern).replace(/\\\$$/, '$')}`).test(path)).sort((a, b) => b.pattern.replace(/\*/g, '').length - a.pattern.replace(/\*/g, '').length || Number(b.allow) - Number(a.allow));
+    const winner = matches[0]; return { allowed: winner ? winner.allow : true, rule: winner ? `${winner.allow ? 'Allow' : 'Disallow'}: ${winner.pattern}` : '' };
+  }
+
+  function renderPages(report: AuditReport) {
+    const query = pageQuery.toLowerCase();
+    const filtered = report.pages.filter((page, index) => {
+      if (query && !`${page.url} ${page.title}`.toLowerCase().includes(query)) return false;
+      if (pageStatusFilter === 'indexable' && !page.indexable) return false;
+      if (pageStatusFilter === 'nonindexable' && page.indexable) return false;
+      if (pageStatusFilter === 'errors' && page.status > 0 && page.status < 400) return false;
+      if (pageStatusFilter === 'redirects' && !page.redirected) return false;
+      if (pageStatusFilter === 'orphan' && (index === 0 || page.incomingLinks > 0)) return false;
+      return true;
+    });
+    filtered.sort((a, b) => pageSort === 'score-asc' ? a.score - b.score : pageSort === 'response-desc' ? b.responseTime - a.responseTime : pageSort === 'depth-desc' ? b.depth - a.depth : pageSort === 'url' ? a.url.localeCompare(b.url) : b.issues.length - a.issues.length);
+    $('#pages-shown').textContent = `${filtered.length} из ${report.pages.length}`;
+    $('#pages-table').innerHTML = filtered.map((page) => `<tr>
+      <td><a href="${escapeHtml(page.url)}" target="_blank" rel="noreferrer">${escapeHtml(shortUrl(page.url))}</a><small>${escapeHtml(page.title || 'Title отсутствует')}</small></td>
+      <td><span class="http-status ${page.status >= 400 || !page.status ? 'bad' : page.redirected ? 'redirect' : ''}">${page.redirected ? `${page.redirectChain.map((hop) => hop.status).join('→')}→${page.status}` : page.status || 'ERR'}</span></td>
+      <td><span class="index-status ${page.indexable ? 'yes' : 'no'}">${page.indexable ? 'Да' : 'Нет'}</span></td><td>${page.depth < 0 ? '—' : page.depth}</td><td>${page.incomingLinks}</td>
+      <td><strong class="table-score ${scoreTone(page.score)}">${page.score}</strong></td><td><strong class="table-score ${scoreTone(page.contentScore)}">${page.contentScore}</strong></td><td>${page.wordCount}</td><td>${page.issues.length}</td><td><button class="page-detail-button" type="button" data-page-index="${report.pages.indexOf(page)}">Детали</button></td>
+    </tr>`).join('') || '<tr><td colspan="10" class="empty-state">Страницы не найдены.</td></tr>';
+  }
+
+  function renderArchitecture(report: AuditReport) {
+    const insight = report.crawlInsights;
+    const kpis: Array<[string, string | number, string, string]> = [
+      ['Индексируемые', insight.indexablePages, `из ${report.pagesScanned}`, insight.nonIndexablePages ? 'warn' : 'good'],
+      ['Средний ответ', `${insight.averageResponseTime} мс`, `p95: ${insight.p95ResponseTime} мс`, insight.p95ResponseTime > 2500 ? 'bad' : insight.p95ResponseTime > 1000 ? 'warn' : 'good'],
+      ['Эффективность обхода', `${insight.crawlEfficiency}%`, `${report.crawl.discovered} найдено`, insight.crawlEfficiency < 25 ? 'warn' : 'good'],
+      ['Макс. глубина', insight.maxDepth, `${insight.deepPages} глубже 3`, insight.deepPages ? 'warn' : 'good'],
+      ['Сиротские', insight.orphanPages, 'в sitemap без ссылок', insight.orphanPages ? 'bad' : 'good'],
+      ['Параметры', insight.parameterizedUrls, 'URL с query string', insight.parameterizedUrls ? 'warn' : 'good'],
+    ];
+    $('#architecture-kpis').innerHTML = kpis.map(([label, value, detail, tone]) => `<div><span>${escapeHtml(label)}</span><strong class="${tone}">${escapeHtml(value)}</strong><small>${escapeHtml(detail)}</small></div>`).join('');
+    const statuses = [
+      ['2xx', insight.statusGroups.ok, 'Успешные', 'ok'], ['3xx', insight.statusGroups.redirects, 'Редиректы', 'redirect'],
+      ['4xx', insight.statusGroups.clientErrors, 'Ошибки клиента', 'bad'], ['5xx', insight.statusGroups.serverErrors, 'Ошибки сервера', 'bad'], ['ERR', insight.statusGroups.failed, 'Недоступны', 'bad'],
+    ];
+    $('#status-matrix').innerHTML = statuses.map(([code, count, label, tone]) => `<div><span class="${tone}">${code}</span><strong>${count}</strong><small>${label}</small></div>`).join('');
+    const depthCounts = new Map<number, number>();
+    report.pages.forEach((page) => depthCounts.set(page.depth, (depthCounts.get(page.depth) || 0) + 1));
+    const maxCount = Math.max(1, ...depthCounts.values());
+    $('#depth-chart').innerHTML = [...depthCounts.entries()].sort((a, b) => a[0] - b[0]).map(([depth, count]) => `<div><span>${depth < 0 ? 'Без пути' : `Уровень ${depth}`}</span><i><b style="width:${count / maxCount * 100}%"></b></i><strong>${count}</strong></div>`).join('');
+    const findings = report.pages.filter((page, index) => page.redirected || page.depth > 3 || page.depth < 0 || !page.indexable || page.urlParameters.length > 3 || index > 0 && page.incomingLinks === 0).slice(0, 20);
+    $('#architecture-findings').innerHTML = findings.length ? findings.map((page) => {
+      const flags = [page.redirected && 'редирект', !page.indexable && 'не индексируется', page.depth < 0 && 'нет пути от главной', page.depth > 3 && `глубина ${page.depth}`, report.pages.indexOf(page) > 0 && page.incomingLinks === 0 && '0 входящих', page.urlParameters.length > 3 && `${page.urlParameters.length} параметров`].filter(Boolean);
+      return `<div class="architecture-finding"><a href="${escapeHtml(page.url)}" target="_blank" rel="noreferrer">${escapeHtml(shortUrl(page.url))}</a><p>${flags.map((flag) => `<span>${escapeHtml(flag)}</span>`).join('')}</p><button type="button" data-architecture-page="${report.pages.indexOf(page)}">Детали</button></div>`;
+    }).join('') : '<p class="empty-state">Структурных проблем среди проверенных страниц не найдено.</p>';
+    $('#sitemap-report').innerHTML = report.sitemaps.length ? report.sitemaps.map((item) => `<div><span class="http-status ${item.status >= 400 || !item.status ? 'bad' : ''}">${item.status || 'ERR'}</span><p><a href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">${escapeHtml(shortUrl(item.url))}</a><small>${item.type === 'index' ? 'Sitemap Index' : item.type === 'urlset' ? 'URL Sitemap' : 'Не распознана'} · ${item.urls} URL${item.invalidUrls ? ` · ${item.invalidUrls} некорректных` : ''}${item.lastmodCount ? ` · lastmod ${item.lastmodCount}` : ''}${item.invalidLastmod ? ` · дат с ошибкой ${item.invalidLastmod}` : ''}${item.futureLastmod ? ` · будущих дат ${item.futureLastmod}` : ''}${item.suspiciousUniformLastmod ? ' · одинаковые lastmod' : ''}${(item.changefreqCount || item.priorityCount) ? ` · устаревших подсказок ${(item.changefreqCount || 0) + (item.priorityCount || 0)}` : ''}${item.error ? ` · ${escapeHtml(item.error)}` : ''}</small></p></div>`).join('') : '<p class="empty-state">Карты сайта не найдены.</p>';
+    const problematicLinks = report.linkChecks.filter((item) => !item.ok || item.redirectChain.length).slice(0, 20);
+    const linkSummary = `<div class="crawl-report-summary"><strong>${report.linkChecks.length}</strong><span>проверено</span><strong>${report.linkChecks.filter((item) => !item.ok).length}</strong><span>недоступно</span><strong>${report.linkChecks.filter((item) => item.redirectChain.length).length}</strong><span>с редиректом</span></div>`;
+    $('#link-report').innerHTML = linkSummary + (problematicLinks.length ? problematicLinks.map((item) => `<div><span class="http-status ${item.ok ? 'redirect' : 'bad'}">${item.status || 'ERR'}</span><p><a href="${escapeHtml(item.url)}" target="_blank" rel="noreferrer">${escapeHtml(shortUrl(item.url))}</a><small>${item.kind === 'internal' ? 'внутренняя' : 'внешняя'} · ${item.sourceUrls.length} источников${item.redirectChain.length ? ` · цепочка ${item.redirectChain.map((hop) => hop.status).join(' → ')}` : ''}${item.error ? ` · ${escapeHtml(item.error)}` : ''}</small></p></div>`).join('') : '<p class="empty-state">Недоступных и перенаправляемых ссылок не найдено.</p>');
+    const risk = (value: number) => `<span class="risk-level ${value >= 2 ? 'high' : value === 1 ? 'medium' : 'low'}">${value >= 2 ? 'Высокий' : value === 1 ? 'Есть риск' : 'Низкий'}</span>`;
+    $('#cwv-table').innerHTML = [...report.pages].sort((a, b) => (b.cwvRisks.lcp + b.cwvRisks.inp + b.cwvRisks.cls) - (a.cwvRisks.lcp + a.cwvRisks.inp + a.cwvRisks.cls)).map((page) => `<tr><td><a href="${escapeHtml(page.url)}" target="_blank" rel="noreferrer">${escapeHtml(shortUrl(page.url))}</a></td><td>${page.responseTime} мс</td><td>${risk(page.cwvRisks.lcp)}</td><td>${risk(page.cwvRisks.inp)}</td><td>${risk(page.cwvRisks.cls)}</td><td>${page.domNodes}</td><td>${page.scripts}</td></tr>`).join('');
+  }
+
+  function renderIssues() {
+    if (!currentReport) return;
+    const normalizedQuery = issueQuery.toLowerCase();
+    const filtered = currentReport.issues.filter((item) => {
+      if (severityFilter !== 'all' && item.severity !== severityFilter) return false;
+      if (categoryFilter !== 'all' && item.category !== categoryFilter) return false;
+      if (hideResolved && resolvedIssues.has(issueFingerprint(item))) return false;
+      return !normalizedQuery || `${item.title} ${item.description} ${item.url || ''}`.toLowerCase().includes(normalizedQuery);
+    });
+    const groups = groupIssues ? groupAuditIssues(filtered) : filtered.map((item) => [item]);
+    $('#issues-list').innerHTML = groups.map((group) => issueMarkup(group[0]!, false, group)).join('') || '<p class="empty-state">Проблем этого уровня не найдено.</p>';
+    $('#issues-shown').textContent = groupIssues ? `${groups.length} групп · ${filtered.length} ошибок` : `Показано: ${filtered.length}`;
+    const resolvedCount = currentReport.issues.filter((item) => resolvedIssues.has(issueFingerprint(item))).length;
+    $('#resolution-label').textContent = `Исправлено ${resolvedCount} из ${currentReport.issues.length}`;
+    $('#resolution-bar').style.width = `${resolvedCount / Math.max(1, currentReport.issues.length) * 100}%`;
+  }
+
+  function openPageDetails(index: number) {
+    if (!currentReport) return;
+    const page = currentReport.pages[index]; if (!page) return;
+    $('#dialog-title').textContent = shortUrl(page.url);
+    $('#page-dialog-content').innerHTML = `<div class="dialog-score-grid">${[['SEO',page.score],['Контент',page.contentScore],['Читаемость',page.readabilityScore],['AI-цитирование',page.aiCitationScore]].map(([label,value]) => `<div><span>${label}</span><strong class="${scoreTone(Number(value))}">${value}</strong></div>`).join('')}</div>
+      <dl class="page-facts"><div><dt>Индексация</dt><dd>${page.indexable ? 'Разрешена' : 'Не индексируется'} · глубина ${page.depth < 0 ? 'не определена' : page.depth} · ${page.incomingLinks} входящих ссылок</dd></div>${page.redirected ? `<div><dt>Редирект</dt><dd>${escapeHtml(page.originalUrl)} → ${escapeHtml(page.finalUrl)}</dd></div>` : ''}<div><dt>Title</dt><dd>${escapeHtml(page.title || 'Отсутствует')}</dd></div><div><dt>Description</dt><dd>${escapeHtml(page.description || 'Отсутствует')}</dd></div><div><dt>Canonical</dt><dd>${escapeHtml(page.canonical || 'Отсутствует')}</dd></div><div><dt>Robots / HTTP</dt><dd>${escapeHtml(page.robots || 'index, follow')}${page.xRobots ? ` · X-Robots: ${escapeHtml(page.xRobots)}` : ''}${page.snippetControls?.length ? ` · ограничения: ${escapeHtml(page.snippetControls.join(', '))}` : ''}</dd></div><div><dt>HTML / DOM / JS</dt><dd>${Math.round(page.htmlBytes/1024)} КБ · ${page.domNodes} элементов · ${page.scripts} скриптов${page.jsAppShellRisk ? ' · риск app shell' : ''}</dd></div><div><dt>Ссылки</dt><dd>${page.internalLinks} внутренних · ${page.externalLinks} внешних · ${page.brokenLinks} битых</dd></div><div><dt>Изображения</dt><dd>${page.images}, без alt: ${page.imagesMissingAlt}, без размеров: ${page.imagesMissingDimensions}, без fallback: ${page.responsiveImagesMissingFallback || 0}</dd></div><div><dt>Видео</dt><dd>${page.videos || 0} · без poster: ${page.videosMissingPoster || 0} · VideoObject: ${page.videoSchemaFound ? 'да' : 'нет'}</dd></div><div><dt>Hreflang</dt><dd>${page.hreflangCount} вариантов · ошибок: ${page.hreflangErrors || 0}</dd></div><div><dt>Даты</dt><dd>публикация: ${escapeHtml(page.publishedDate || 'не найдена')} · обновление: ${escapeHtml(page.modifiedDate || 'не найдено')}</dd></div><div><dt>Schema.org</dt><dd>${escapeHtml(page.schemaTypes.join(', ') || 'не найдена')}</dd></div></dl>
+      ${page.keywordMetrics.length ? `<section class="dialog-section"><h3>Ключевые фразы</h3>${page.keywordMetrics.map((item) => `<p><strong>${escapeHtml(item.keyword)}</strong><span>${item.count} вх. · ${item.density}% · title ${item.inTitle?'да':'нет'} · H1 ${item.inH1?'да':'нет'}</span></p>`).join('')}</section>` : ''}
+      <section class="dialog-section"><h3>Проблемы страницы (${page.issues.length})</h3>${page.issues.map((item) => `<p><strong>${escapeHtml(item.title)}</strong><span>${escapeHtml(item.recommendation)}</span></p>`).join('') || '<p>Проблем не найдено.</p>'}</section>`;
+    delete ($('#page-dialog') as HTMLDialogElement).dataset.contentPage; ($('#page-dialog') as HTMLDialogElement).showModal();
+  }
+
+  function openContentDetails(index: number) {
+    if (!currentReport) return; const page = currentReport.pages[index]; if (!page) return; const analysis = contentFor(page);
+    const dimensionLabels: Record<string, string> = { intent: 'Соответствие интенту', depth: 'Полнота раскрытия', structure: 'Структура', readability: 'Читабельность', originality: 'Уникальность', experience: 'Реальный опыт', expertise: 'Экспертность', trust: 'Доверие', keywordUse: 'Работа с ключами', aiReadiness: 'AI-цитируемость' };
+    $('#dialog-title').textContent = `Контент: ${shortUrl(page.url)}`;
+    $('#page-dialog-content').innerHTML = `<div class="content-detail-hero"><div class="content-grade ${scoreTone(analysis.score)}"><strong>${analysis.score}</strong><span>${analysis.grade}</span></div><div><span>${escapeHtml(analysis.pageType)} · ${escapeHtml(analysis.searchIntent)}</span><h3>${escapeHtml(analysis.primaryTopic || page.title || 'Тема не определена')}</h3><p>${page.wordCount} слов · ориентир ${analysis.minimumWords} · ${analysis.readingTime} мин чтения</p></div></div>
+      <div class="content-detail-dimensions">${Object.entries(analysis.dimensions).map(([key, value]) => `<div><span>${escapeHtml(dimensionLabels[key] || key)}</span><i><b class="${scoreTone(value)}" style="width:${value}%"></b></i><strong class="${scoreTone(value)}">${value}</strong></div>`).join('')}</div>
+      <div class="content-fact-grid"><div><span>Предложений</span><strong>${analysis.sentenceCount || '—'}</strong></div><div><span>Слов в предложении</span><strong>${analysis.averageSentenceWords || '—'}</strong></div><div><span>Длинных предложений</span><strong>${analysis.longSentencePercent}%</strong></div><div><span>Фактов и чисел</span><strong>${analysis.factsAndNumbers}</strong></div><div><span>Внешних ссылок</span><strong>${analysis.sourceLinks}</strong></div><div><span>Риск повторов</span><strong class="${analysis.repetitionRisk >= 45 ? 'bad' : 'good'}">${analysis.repetitionRisk}</strong></div></div>
+      ${analysis.firstParagraph ? `<section class="dialog-section"><h3>Первый абзац</h3><p><span>${escapeHtml(analysis.firstParagraph)}</span></p></section>` : ''}
+      <div class="content-detail-columns"><section class="dialog-section"><h3>Сильные стороны</h3>${analysis.strengths.map((item) => `<p class="positive-line"><strong>✓</strong><span>${escapeHtml(item)}</span></p>`).join('') || '<p><span>Явных сильных сигналов пока не найдено.</span></p>'}</section><section class="dialog-section"><h3>Слабые стороны</h3>${analysis.weaknesses.map((item) => `<p class="negative-line"><strong>!</strong><span>${escapeHtml(item)}</span></p>`).join('') || '<p><span>Критичных пробелов модели не найдено.</span></p>'}</section></div>
+      <section class="dialog-section recommendations-section"><h3>Что улучшить на этой странице</h3>${analysis.recommendations.map((item, itemIndex) => `<p><strong>${String(itemIndex + 1).padStart(2, '0')}</strong><span>${escapeHtml(item)}</span></p>`).join('') || '<p><span>Приоритетных рекомендаций нет.</span></p>'}</section>
+      ${analysis.outline.length ? `<section class="dialog-section"><h3>Структура заголовков</h3>${analysis.outline.map((item) => `<p><span>${escapeHtml(item)}</span></p>`).join('')}</section>` : ''}
+      ${page.keywordMetrics.length ? `<section class="dialog-section"><h3>Ключевые фразы</h3>${page.keywordMetrics.map((item) => `<p><strong>${escapeHtml(item.keyword)}</strong><span>${item.count} вхождений · ${item.density}% · title ${item.inTitle?'да':'нет'} · description ${item.inDescription?'да':'нет'} · H1 ${item.inH1?'да':'нет'} · начало ${item.inFirst100Words?'да':'нет'}</span></p>`).join('')}</section>` : ''}
+      <section class="dialog-section content-checks"><h3>Расширенные проверки (${analysis.checks.filter((check) => check.passed).length}/${analysis.checks.length} пройдено)</h3>${analysis.checks.map((check) => `<div class="content-check ${check.passed ? 'passed' : 'failed'}"><span>${check.passed ? '✓' : '!'}</span><div><strong>${escapeHtml(check.label)}</strong><p>${escapeHtml(check.evidence)}</p>${check.passed ? '' : `<small>${escapeHtml(check.recommendation)}</small>`}</div>${check.passed ? '' : `<button type="button" data-copy-content-check="${escapeHtml(check.id)}">Промпт</button>`}</div>`).join('')}</section>
+      <section class="content-master-prompt"><div><span>CODEX FIX PLAN</span><h3>Исправить все проблемы этой страницы</h3><p>${analysis.checks.filter((check) => !check.passed).length} непройденных проверок будут переданы в одном безопасном задании.</p></div><button type="button" data-download-content-plan>Скачать план .md</button></section>
+      <p class="method-note"><strong>Методика:</strong> оценка является объяснимой HTML-эвристикой. Она показывает наблюдаемые сигналы, но не подтверждает фактическую точность, оригинальность или реальный опыт без редакторской проверки.</p>`;
+    ($('#page-dialog') as HTMLDialogElement).dataset.contentPage = String(index); ($('#page-dialog') as HTMLDialogElement).showModal();
+  }
+
+  const normalizedPageUrl = (value: string) => { try { const url = new URL(value); url.hash = ''; return url.toString().replace(/\/$/, ''); } catch { return value.replace(/\/$/, ''); } };
+
+  function renderLinkGraph(report: AuditReport) {
+    const pages = report.pages.slice(0, 18); const svg = $('#link-graph');
+    if (!pages.length) { svg.innerHTML = ''; return; }
+    const nodes = pages.map((page, index) => ({ page, x: 380 + Math.cos(index / pages.length * Math.PI * 2 - Math.PI / 2) * 275, y: 165 + Math.sin(index / pages.length * Math.PI * 2 - Math.PI / 2) * 120 }));
+    const byUrl = new Map(nodes.map((node) => [normalizedPageUrl(node.page.url), node]));
+    const lines = nodes.flatMap((node) => (node.page.outgoingInternalUrls || []).slice(0, 30).map((url) => ({ from: node, to: byUrl.get(normalizedPageUrl(url)) })).filter((edge): edge is { from: typeof node; to: typeof node } => Boolean(edge.to))).slice(0, 90);
+    svg.innerHTML = `<g class="graph-lines">${lines.map((edge) => `<line x1="${edge.from.x}" y1="${edge.from.y}" x2="${edge.to.x}" y2="${edge.to.y}" />`).join('')}</g>${nodes.map((node, index) => `<g class="graph-node"><circle cx="${node.x}" cy="${node.y}" r="${index ? 11 : 15}" /><title>${escapeHtml(node.page.url)}</title><text x="${node.x}" y="${node.y + 27}" text-anchor="middle">${escapeHtml(shortUrl(node.page.url).slice(-22))}</text></g>`).join('')}`;
+  }
+
+  function linkSuggestions(report: AuditReport) {
+    const suggestions: Array<{ source: PageAudit; target: PageAudit; terms: string[]; prompt: string }> = [];
+    for (const source of report.pages) for (const target of report.pages) {
+      if (source === target || (source.outgoingInternalUrls || []).some((url) => normalizedPageUrl(url) === normalizedPageUrl(target.url))) continue;
+      const sourceTerms = new Set(source.topTerms.slice(0, 12).map((item) => item.term.toLowerCase()));
+      const terms = target.topTerms.slice(0, 12).map((item) => item.term.toLowerCase()).filter((term) => sourceTerms.has(term));
+      if (terms.length < 2) continue;
+      const prompt = `Добавь контекстную внутреннюю ссылку со страницы ${source.url} на ${target.url}. Найди естественный абзац по теме «${terms.slice(0, 3).join(', ')}», используй описательный анкор и не меняй смысл текста. После изменения проверь ссылку, доступность и отсутствие дублирующего анкора.`;
+      suggestions.push({ source, target, terms, prompt });
+    }
+    return suggestions.sort((a, b) => b.terms.length - a.terms.length || a.source.incomingLinks - b.source.incomingLinks).slice(0, 10);
+  }
+
+  function renderClusters(report: AuditReport) {
+    const phrases = [...new Set([...report.targetKeywords, ...report.pages.map((page) => contentFor(page).primaryTopic), ...report.topTerms.slice(0, 20).map((item) => item.term)].map((item) => item.trim()).filter(Boolean))];
+    const stop = new Set(['для','как','что','это','или','при','the','and','with','from']);
+    const clusters: Array<{ name: string; tokens: Set<string>; phrases: string[]; pages: Set<string> }> = [];
+    phrases.forEach((phrase) => {
+      const tokens = new Set(phrase.toLowerCase().split(/[^a-zа-яё0-9]+/i).filter((token) => token.length > 2 && !stop.has(token)));
+      let cluster = clusters.find((item) => [...tokens].some((token) => item.tokens.has(token)));
+      if (!cluster) { cluster = { name: phrase, tokens: new Set(tokens), phrases: [], pages: new Set() }; clusters.push(cluster); }
+      cluster.phrases.push(phrase); tokens.forEach((token) => cluster!.tokens.add(token));
+      report.pages.filter((page) => [...tokens].some((token) => `${page.title} ${page.h1.join(' ')} ${page.topTerms.map((term) => term.term).join(' ')}`.toLowerCase().includes(token))).slice(0, 8).forEach((page) => cluster!.pages.add(page.url));
+    });
+    $('#keyword-clusters').innerHTML = clusters.slice(0, 12).map((cluster) => `<div class="tool-row"><div><strong>${escapeHtml(cluster.name)}</strong><span>${cluster.phrases.length} фраз · ${cluster.pages.size} релевантных страниц</span></div><small>${escapeHtml(cluster.phrases.slice(0, 4).join(' · '))}</small></div>`).join('') || '<p class="empty-state">Добавьте ключевые фразы при запуске аудита.</p>';
+  }
+
+  function renderIntentMap(report: AuditReport) {
+    if (!report.targetKeywords.length) {
+      $('#intent-map').innerHTML = '<p class="empty-state">Укажите целевые ключевые фразы перед аудитом — инструмент построит карту URL и покажет пересечения интентов.</p>';
+      return;
+    }
+    const rows = report.targetKeywords.map((keyword) => {
+      const candidates = report.pages.map((page) => {
+        const metric = page.keywordMetrics.find((item) => item.keyword === keyword);
+        const score = (metric?.inTitle ? 35 : 0) + (metric?.inH1 ? 30 : 0) + (metric?.inDescription ? 10 : 0) + (metric?.inFirst100Words ? 15 : 0) + Math.min(10, (metric?.count || 0) * 2);
+        return { page, metric, score };
+      }).filter((item) => item.score > 0).sort((a, b) => b.score - a.score);
+      const primary = candidates[0];
+      const competitors = candidates.filter((item) => item.score >= Math.max(45, (primary?.score || 0) - 15));
+      const status = !primary ? 'Не назначена' : competitors.length > 1 ? 'Риск каннибализации' : 'Целевая страница найдена';
+      const tone = !primary ? 'bad-text' : competitors.length > 1 ? 'warn-text' : 'good-text';
+      const prompt = primary ? `Проведи ручную проверку интента для ключевой фразы «${keyword}». Основной кандидат: ${primary.page.url}. Конкурирующие URL: ${competitors.map((item) => item.page.url).join(', ') || 'нет'}. Сравни выдачу Яндекса/Google, title, H1, первый экран, содержание, FAQ и внутренние анкоры. Не меняй primary URL только по плотности ключа. Если интенты одинаковые — предложи объединение/301; если разные — сформулируй отдельный user job и разведи метаданные, содержание и перелинковку. Покажи решение и аргументы, не выдумывай частотность.` : `Для ключевой фразы «${keyword}» не найдена релевантная страница в проверенном наборе ${report.url}. Сначала проверь реальную частотность и интент в Wordstat/Search Console/SERP. Затем реши: доработать существующий URL, не использовать запрос или создать страницу только при самостоятельной пользовательской задаче. Не создавай thin/doorway page.`;
+      return { keyword, primary, competitors, status, tone, prompt };
+    });
+    ($('#intent-map') as HTMLElement).dataset.prompts = JSON.stringify(rows.map((row) => row.prompt));
+    $('#intent-map').innerHTML = rows.map((row, index) => `<div class="tool-row intent-row"><div><strong>${escapeHtml(row.keyword)}</strong><span>${row.primary ? escapeHtml(shortUrl(row.primary.page.url)) : 'Нет релевантного URL'}${row.competitors.length > 1 ? ` · конкурируют ${row.competitors.length} страницы` : ''}</span></div><small class="${row.tone}">${row.status}</small><button type="button" data-copy-intent="${index}">Промпт</button></div>`).join('');
+  }
+
+  async function renderProductTools(report: AuditReport, previous?: ReportSummary) {
+    const suggestions = linkSuggestions(report);
+    const accessibilityIssues = report.pages.reduce((sum, page) => sum + page.imagesMissingAlt + page.formsMissingLabels + page.emptyLinks + page.headingOrderIssues + (page.lang ? 0 : 1), 0);
+    const accessibilityScore = Math.max(0, Math.round(100 - accessibilityIssues / Math.max(1, report.pages.length) * 8));
+    const schemaPages = report.pages.filter((page) => page.schemaTypes.length).length;
+    $('#tool-kpis').innerHTML = `<div><span>Доступность</span><strong class="${scoreTone(accessibilityScore)}">${accessibilityScore}</strong></div><div><span>Schema coverage</span><strong>${Math.round(schemaPages / Math.max(1, report.pages.length) * 100)}%</strong></div><div><span>Новых ссылок</span><strong>${suggestions.length}</strong></div><div><span>Исправлено</span><strong>${resolvedIssues.size}</strong></div>`;
+    renderClusters(report); renderIntentMap(report); renderLinkGraph(report);
+    $('#link-opportunities').innerHTML = suggestions.length ? suggestions.map((item, index) => `<div class="tool-row link-suggestion"><div><strong>${escapeHtml(shortUrl(item.source.url))} → ${escapeHtml(shortUrl(item.target.url))}</strong><span>Общие темы: ${escapeHtml(item.terms.slice(0, 4).join(', '))}</span></div><button type="button" data-copy-link="${index}">Промпт</button></div>`).join('') : '<p class="empty-state">Очевидных новых связей не найдено.</p>';
+    ($('#link-opportunities') as HTMLElement).dataset.prompts = JSON.stringify(suggestions.map((item) => item.prompt));
+    const accessibilityPages = report.pages.map((page) => ({ page, count: page.imagesMissingAlt + page.formsMissingLabels + page.emptyLinks + page.headingOrderIssues + (page.lang ? 0 : 1) })).filter((item) => item.count).sort((a, b) => b.count - a.count).slice(0, 12);
+    $('#accessibility-report').innerHTML = `<div class="mini-summary"><strong>${accessibilityIssues}</strong><span>наблюдаемых проблем</span></div>${accessibilityPages.map(({ page, count }) => `<div class="tool-row"><div><strong>${escapeHtml(shortUrl(page.url))}</strong><span>${count} проблем · alt ${page.imagesMissingAlt} · формы ${page.formsMissingLabels} · ссылки ${page.emptyLinks} · заголовки ${page.headingOrderIssues}</span></div></div>`).join('') || '<p class="empty-state">Базовые HTML-проверки пройдены. Для WCAG запустите Lighthouse.</p>'}`;
+    $('#schema-inventory').innerHTML = report.pages.map((page) => `<div class="tool-row"><div><strong>${escapeHtml(shortUrl(page.url))}</strong><span>${page.schemaTypes.length ? page.schemaTypes.map(escapeHtml).join(', ') : 'Schema не найдена'}</span></div>${page.schemaErrors.length ? `<small class="bad-text">${page.schemaErrors.length} ошибок</small>` : '<small class="good-text">валидно</small>'}</div>`).join('');
+    ($('#rendered-page') as HTMLSelectElement).innerHTML = report.pages.map((page, index) => `<option value="${index}">${escapeHtml(shortUrl(page.url))}</option>`).join('');
+    $('#rendered-report').innerHTML = '<p class="empty-state">Выберите страницу и загрузите её отрисованный HTML.</p>';
+
+    const previousReport = previous ? await loadFullReport(previous.id) : null;
+    if (currentReport?.id !== report.id) return;
+    if (!previousReport) $('#change-report').innerHTML = '<p class="empty-state">Это первый полный аудит сайта. Следующий запуск покажет изменения каждой страницы.</p>';
+    else {
+      const oldPages = new Map(previousReport.pages.map((page) => [normalizedPageUrl(page.url), page]));
+      const changes = report.pages.map((page) => { const old = oldPages.get(normalizedPageUrl(page.url)); if (!old) return { page, label: 'Новая страница', detail: 'URL появился в текущем аудите', good: true }; const fixed = old.issues.filter((issue) => !page.issues.some((item) => issueFingerprint(item) === issueFingerprint(issue))).length; const added = page.issues.filter((issue) => !old.issues.some((item) => issueFingerprint(item) === issueFingerprint(issue))).length; const fields = [old.title !== page.title && 'title', old.description !== page.description && 'description', old.canonical !== page.canonical && 'canonical', old.indexable !== page.indexable && 'индексация', old.wordCount !== page.wordCount && `слова ${old.wordCount}→${page.wordCount}`, old.score !== page.score && `SEO ${old.score}→${page.score}`].filter(Boolean); return fields.length || fixed || added ? { page, label: `${fixed} исправлено · ${added} новых`, detail: fields.join(', ') || 'изменился набор проблем', good: fixed > added } : null; }).filter(Boolean) as Array<{ page: PageAudit; label: string; detail: string; good: boolean }>;
+      $('#change-report').innerHTML = `<div class="mini-summary"><strong>${changes.length}</strong><span>страниц изменилось с ${formatDate(previousReport.createdAt)}</span></div>${changes.slice(0, 20).map((item) => `<div class="tool-row"><div><strong>${escapeHtml(shortUrl(item.page.url))}</strong><span>${escapeHtml(item.detail)}</span></div><small class="${item.good ? 'good-text' : 'bad-text'}">${escapeHtml(item.label)}</small></div>`).join('') || '<p class="empty-state">Изменений в проверяемых сигналах нет.</p>'}`;
+    }
+    runCustomRules();
+  }
+
+  function runCustomRules() {
+    if (!currentReport) return; const source = ($('#custom-rules') as HTMLTextAreaElement).value; localStorage.setItem('sitescan:custom-rules', source);
+    const allowed: Record<string, (page: PageAudit) => number | string | boolean> = { titleLength: (p) => p.titleLength, descriptionLength: (p) => p.descriptionLength, wordCount: (p) => p.wordCount, imagesMissingAlt: (p) => p.imagesMissingAlt, indexable: (p) => p.indexable, responseTime: (p) => p.responseTime, contentScore: (p) => p.contentScore, score: (p) => p.score, internalLinks: (p) => p.internalLinks, incomingLinks: (p) => p.incomingLinks, depth: (p) => p.depth, status: (p) => p.status, h1Count: (p) => p.h1.length, schemaCount: (p) => p.schemaTypes.length, hreflangErrors: (p) => p.hreflangErrors || 0 };
+    const rules = source.split(/\r?\n/).map((line) => ({ line: line.trim(), match: line.trim().match(/^(\w+)\s*(>=|<=|!=|=|>|<)\s*(.+)$/) })).filter((item) => item.line);
+    const invalid = rules.filter((item) => !item.match || !allowed[item.match[1]!]); const violations: Array<{ page: PageAudit; rule: string; actual: unknown; prompt: string }> = [];
+    rules.filter((item) => item.match && allowed[item.match[1]!]).forEach(({ line, match }) => { const field = match?.[1] || ''; const operator = match?.[2] || '='; const raw = match?.[3] || ''; let expected: number | boolean | string = raw.trim(); if (/^-?\d+(?:\.\d+)?$/.test(String(expected))) expected = Number(expected); else if (/^(true|false)$/i.test(String(expected))) expected = String(expected).toLowerCase() === 'true'; currentReport!.pages.forEach((page) => { const actual = allowed[field]!(page); const left = typeof actual === 'number' ? actual : String(actual); const right = typeof actual === 'number' ? Number(expected) : String(expected); const pass = operator === '>=' ? left >= right : operator === '<=' ? left <= right : operator === '>' ? left > right : operator === '<' ? left < right : operator === '!=' ? left !== right : left === right; if (!pass) violations.push({ page, rule: line, actual, prompt: `Исправь страницу ${page.url}, чтобы она прошла пользовательское SEO-правило «${line}». Сейчас ${field} = ${String(actual)}. Сначала найди общий шаблон, не выдумывай факты и после изменения проверь HTML, типизацию и сборку.` }); }); });
+    customRulePrompts = violations.map((item) => item.prompt);
+    $('#custom-rules-report').innerHTML = `${invalid.length ? `<p class="integration-error">Не распознано правил: ${invalid.map((item) => escapeHtml(item.line)).join(', ')}</p>` : ''}<div class="mini-summary"><strong>${violations.length}</strong><span>нарушений на ${currentReport.pages.length} страницах</span></div>${violations.slice(0, 15).map((item, index) => `<div class="tool-row"><div><strong>${escapeHtml(shortUrl(item.page.url))}</strong><span>${escapeHtml(item.rule)} · сейчас ${escapeHtml(item.actual)}</span></div><button type="button" data-copy-custom="${index}">Промпт</button></div>`).join('') || '<p class="empty-state">Все пользовательские правила пройдены.</p>'}`;
+  }
+
+  function openTab(name: string, updateUrl = true) {
+    document.querySelectorAll<HTMLElement>('.section-nav [role="tab"]').forEach((tab) => { const active = tab.dataset.tab === name; tab.classList.toggle('active', active); tab.setAttribute('aria-selected', String(active)); tab.tabIndex = active ? 0 : -1; });
+    document.querySelectorAll<HTMLElement>('.tab-panel').forEach((panel) => { panel.hidden = panel.id !== `tab-${name}`; });
+    if (updateUrl) { const url = new URL(window.location.href); name === 'overview' ? url.searchParams.delete('tab') : url.searchParams.set('tab', name); window.history.replaceState({}, '', url); }
+  }
+
+  function syncReportState() {
+    const url = new URL(window.location.href); const set = (key: string, value: string, fallback: string) => value === fallback ? url.searchParams.delete(key) : url.searchParams.set(key, value);
+    set('severity', severityFilter, 'all'); set('category', categoryFilter, 'all'); set('q', issueQuery, ''); set('resolved', hideResolved ? 'hide' : '', ''); set('group', groupIssues ? '' : 'off', '');
+    set('pageQ', pageQuery, ''); set('pageStatus', pageStatusFilter, 'all'); set('pageSort', pageSort, 'issues'); window.history.replaceState({}, '', url);
+  }
+
+  form.addEventListener('submit', (event) => { event.preventDefault(); run({ url: input.value, limit: Number(limit.value), keywords: keywordInput.value }); });
+  $('#demo-button').addEventListener('click', () => run({ demo: true }));
+  $('#retry-button').addEventListener('click', () => { errorPanel.hidden = true; input.focus(); });
+  $('#new-audit').addEventListener('click', () => { results.hidden = true; input.focus(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  document.querySelectorAll<HTMLElement>('.section-nav [data-tab]').forEach((button) => button.addEventListener('click', () => openTab(button.dataset.tab!)));
+  $('.section-nav').addEventListener('keydown', (event) => {
+    const keyboard = event as KeyboardEvent; if (!['ArrowLeft','ArrowRight','Home','End'].includes(keyboard.key)) return;
+    const tabs = [...document.querySelectorAll<HTMLElement>('.section-nav [data-tab]')]; const current = tabs.indexOf(document.activeElement as HTMLElement); if (current < 0) return;
+    keyboard.preventDefault(); const next = keyboard.key === 'Home' ? 0 : keyboard.key === 'End' ? tabs.length - 1 : (current + (keyboard.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+    tabs[next]?.focus(); openTab(tabs[next]!.dataset.tab!);
+  });
+  document.querySelectorAll<HTMLElement>('[data-open-tab]').forEach((button) => button.addEventListener('click', () => openTab(button.dataset.openTab!)));
+  document.querySelectorAll<HTMLElement>('[data-filter]').forEach((button) => button.addEventListener('click', () => {
+    document.querySelectorAll('[data-filter]').forEach((item) => item.classList.remove('active'));
+    button.classList.add('active'); severityFilter = button.dataset.filter!; syncReportState(); renderIssues();
+  }));
+  $('#issue-search').addEventListener('input', (event) => { issueQuery = (event.target as HTMLInputElement).value; syncReportState(); renderIssues(); });
+  $('#category-filter').addEventListener('change', (event) => { categoryFilter = (event.target as HTMLSelectElement).value; syncReportState(); renderIssues(); });
+  $('#hide-resolved').addEventListener('change', (event) => { hideResolved = (event.target as HTMLInputElement).checked; syncReportState(); renderIssues(); });
+  $('#group-issues').addEventListener('change', (event) => { groupIssues = (event.target as HTMLInputElement).checked; syncReportState(); renderIssues(); });
+  $('#page-search').addEventListener('input', (event) => { pageQuery = (event.target as HTMLInputElement).value; syncReportState(); if (currentReport) renderPages(currentReport); });
+  $('#page-status-filter').addEventListener('change', (event) => { pageStatusFilter = (event.target as HTMLSelectElement).value; syncReportState(); if (currentReport) renderPages(currentReport); });
+  $('#page-sort').addEventListener('change', (event) => { pageSort = (event.target as HTMLSelectElement).value; syncReportState(); if (currentReport) renderPages(currentReport); });
+  $('#gsc-import').addEventListener('change', async (event) => {
+    const file = (event.target as HTMLInputElement).files?.[0]; if (!file || !currentReport) return;
+    try { const rows = mapSearchConsoleCsv(await file.text()); currentReport.searchConsole = rows; renderSearchConsole(rows); await saveFullReport(currentReport); }
+    catch (error) { window.alert(error instanceof Error ? error.message : 'Не удалось разобрать CSV'); }
+  });
+  $('#run-pagespeed').addEventListener('click', async () => {
+    if (!currentReport) return; const button = $('#run-pagespeed') as HTMLButtonElement; const panel = $('#pagespeed-report');
+    button.disabled = true; button.textContent = 'PageSpeed работает…'; panel.hidden = false; panel.innerHTML = '<p class="empty-state">Google Lighthouse запускает лабораторный тест. Обычно это занимает 20–60 секунд…</p>';
+    try {
+      const response = await fetch('/api/pagespeed', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ url: currentReport.url, strategy: ($('#pagespeed-strategy') as HTMLSelectElement).value }) });
+      const data = await response.json(); if (!response.ok) throw new Error(data.error || 'PageSpeed недоступен');
+      const metric = (value: number | null, unit = ' мс') => value == null ? '—' : `${unit ? Math.round(value) : value.toFixed(3)}${unit}`;
+      const screenshot = typeof data.screenshot === 'string' && /^data:image\//.test(data.screenshot) ? `<figure class="lighthouse-screenshot"><img src="${escapeHtml(data.screenshot)}" alt="Отрисованный Lighthouse скриншот страницы" /><figcaption>Реальный финальный кадр Lighthouse: проверьте перекрытия, пустой первый экран, баннеры и визуальный сдвиг.</figcaption></figure>` : '';
+      panel.innerHTML = `<div class="pagespeed-scores">${Object.entries(data.scores).map(([name, score]) => `<div><span>${escapeHtml(name)}</span><strong class="${scoreTone(Number(score))}">${score}</strong></div>`).join('')}</div><div class="pagespeed-metrics"><span>FCP <strong>${metric(data.metrics.fcp)}</strong></span><span>LCP <strong>${metric(data.metrics.lcp)}</strong></span><span>TBT <strong>${metric(data.metrics.tbt)}</strong></span><span>CLS <strong>${metric(data.metrics.cls, '')}</strong></span><span>Speed Index <strong>${metric(data.metrics.speedIndex)}</strong></span></div>${screenshot}${data.opportunities.length ? `<div class="opportunity-list">${data.opportunities.map((item: any) => `<div><strong>${escapeHtml(item.title)}</strong><span>потенциал ~${item.savingsMs} мс</span></div>`).join('')}</div>` : ''}<p class="data-source">${escapeHtml(data.source)} · ${escapeHtml(data.strategy)} · ${formatDate(data.fetchedAt)}</p>`;
+    } catch (error) { panel.innerHTML = `<p class="integration-error"><strong>PageSpeed не ответил.</strong> ${escapeHtml(error instanceof Error ? error.message : 'Повторите позже')}. Для частых запросов задайте PAGESPEED_API_KEY в окружении.</p>`; }
+    finally { button.disabled = false; button.textContent = 'Запустить PageSpeed'; }
+  });
+  $('#test-robots').addEventListener('click', () => {
+    if (!currentReport) return; const value = ($('#robots-test-url') as HTMLInputElement).value.trim(); const agent = ($('#robots-user-agent') as HTMLSelectElement).value; const output = $('#robots-test-result');
+    try { const reportOrigin = new URL(currentReport.origin).origin; const url = new URL(value || currentReport.url, reportOrigin); if (url.origin !== reportOrigin) throw new Error('URL должен относиться к проверенному сайту'); const result = testRobots(currentReport.technical.robotsText || '', url, agent); output.className = `tester-result ${result.allowed ? 'allowed' : 'blocked'}`; output.innerHTML = `<div><strong>${result.allowed ? 'Разрешено для обхода' : 'Запрещено правилом robots.txt'}</strong><span>${escapeHtml(result.rule || 'Подходящих правил нет — обход разрешён')}</span></div>`; }
+    catch (error) { output.className = 'tester-result blocked'; output.textContent = error instanceof Error ? error.message : 'Некорректный URL'; }
+  });
+  $('#cancel-audit').addEventListener('click', () => {
+    activeController?.abort(); stopLoading(); loading.hidden = true;
+  });
+  $('#clear-history').addEventListener('click', () => {
+    if (!window.confirm('Очистить локальную историю аудитов?')) return;
+    localStorage.removeItem(historyKey); clearFullReports().catch(() => {}); historyExpanded = false; renderHistory();
+  });
+  $('#history-toggle').addEventListener('click', () => { historyExpanded = !historyExpanded; renderHistory(); });
+  $('#history-list').addEventListener('click', async (event) => {
+    const openButton = (event.target as HTMLElement).closest<HTMLElement>('[data-open-report]');
+    if (openButton?.dataset.openReport) {
+      const report = await loadFullReport(openButton.dataset.openReport);
+      if (!report) { window.alert('Полный отчёт недоступен. Запустите аудит повторно.'); return; }
+      currentReport = report; renderReport(report); results.hidden = false; results.scrollIntoView({ behavior: 'smooth', block: 'start' }); return;
+    }
+    const button = (event.target as HTMLElement).closest<HTMLElement>('[data-rerun-url]');
+    if (!button?.dataset.rerunUrl) return;
+    input.value = button.dataset.rerunUrl;
+    run({ url: input.value, limit: Number(limit.value), keywords: keywordInput.value });
+  });
+  $('#pages-table').addEventListener('click', (event) => {
+    const button = (event.target as HTMLElement).closest<HTMLElement>('[data-page-index]');
+    if (button) openPageDetails(Number(button.dataset.pageIndex));
+  });
+  $('#content-pages-table').addEventListener('click', (event) => { const button = (event.target as HTMLElement).closest<HTMLElement>('[data-content-page]'); if (button) openContentDetails(Number(button.dataset.contentPage)); });
+  $('#architecture-findings').addEventListener('click', (event) => {
+    const button = (event.target as HTMLElement).closest<HTMLElement>('[data-architecture-page]');
+    if (button) openPageDetails(Number(button.dataset.architecturePage));
+  });
+  $('#close-dialog').addEventListener('click', () => ($('#page-dialog') as HTMLDialogElement).close());
+  $('#page-dialog').addEventListener('click', (event) => {
+    const dialog = $('#page-dialog') as HTMLDialogElement; const index = Number(dialog.dataset.contentPage); const page = currentReport?.pages[index];
+    const checkButton = (event.target as HTMLElement).closest<HTMLElement>('[data-copy-content-check]');
+    if (checkButton && page) { const check = contentFor(page).checks.find((item) => item.id === checkButton.dataset.copyContentCheck); if (check?.codexPrompt) copyText(check.codexPrompt); return; }
+    if ((event.target as HTMLElement).closest('[data-download-content-plan]') && page && currentReport) {
+      saveBlob(new Blob([contentFor(page).codexPrompt], { type: 'text/markdown;charset=utf-8' }), markdownFilename(currentReport.url, 'codex-content-plan', page.url));
+      return;
+    }
+    if (event.target === dialog) dialog.close();
+  });
+  const saveBlob = (blob: Blob, filename: string) => {
+    const objectUrl = URL.createObjectURL(blob); const link = document.createElement('a'); link.href = objectUrl; link.download = filename; document.body.append(link); link.click(); link.remove();
+    window.setTimeout(() => URL.revokeObjectURL(objectUrl), 1000);
+  };
+  const markdownFilename = (reportUrl: string, prefix: string, pageUrl?: string) => {
+    const domain = new URL(reportUrl).hostname.replace(/^www\./i, '').replace(/[^a-z0-9.-]+/gi, '-');
+    let pageSuffix = '';
+    if (pageUrl) {
+      const path = new URL(pageUrl).pathname.replace(/^\/+|\/+$/g, '').replace(/[^a-z0-9а-яё.-]+/gi, '-');
+      if (path) pageSuffix = `-${path}`;
+    }
+    return `${prefix}-${domain}${pageSuffix}.md`;
+  };
+  const masterPrompt = (report: AuditReport) => buildMasterAuditPrompt(report);
+  async function copyText(value: string) {
+    try { await navigator.clipboard.writeText(value); }
+    catch { window.prompt('Скопируйте промпт вручную:', value); }
+    const toast = $('#copy-toast'); toast.hidden = false; window.setTimeout(() => { toast.hidden = true; }, 1800);
+  }
+  $('#export-json').addEventListener('click', () => {
+    if (!currentReport) return;
+    saveBlob(new Blob([JSON.stringify(currentReport, null, 2)], { type: 'application/json' }), `seo-audit-${new URL(currentReport.url).hostname}.json`);
+  });
+  $('#export-csv').addEventListener('click', () => {
+    if (!currentReport) return;
+    const cell = (value: unknown) => `"${String(value ?? '').replace(/"/g, '""')}"`;
+    const rows = [['URL', 'Original URL', 'HTTP', 'Redirected', 'Indexable', 'Depth', 'Incoming links', 'SEO score', 'Content score', 'Content grade', 'Page type', 'Search intent', 'Intent', 'Depth quality', 'Structure', 'Readability', 'Originality', 'Experience', 'Expertise', 'Trust', 'Keyword use', 'AI citation', 'Repetition risk', 'Words', 'Minimum words', 'Reading time', 'Title', 'H1', 'Issues'], ...currentReport.pages.map((page) => { const analysis = contentFor(page); return [page.url, page.originalUrl, page.status, page.redirected, page.indexable, page.depth, page.incomingLinks, page.score, analysis.score, analysis.grade, analysis.pageType, analysis.searchIntent, analysis.dimensions.intent, analysis.dimensions.depth, analysis.dimensions.structure, analysis.dimensions.readability, analysis.dimensions.originality, analysis.dimensions.experience, analysis.dimensions.expertise, analysis.dimensions.trust, analysis.dimensions.keywordUse, analysis.dimensions.aiReadiness, analysis.repetitionRisk, page.wordCount, analysis.minimumWords, analysis.readingTime, page.title, page.h1.join(' | '), page.issues.length]; })];
+    saveBlob(new Blob(['\uFEFF' + rows.map((row) => row.map(cell).join(';')).join('\r\n')], { type: 'text/csv;charset=utf-8' }), `seo-pages-${new URL(currentReport.url).hostname}.csv`);
+  });
+  $('#export-codex').addEventListener('click', () => {
+    if (!currentReport) return;
+    saveBlob(new Blob([masterPrompt(currentReport)], { type: 'text/markdown;charset=utf-8' }), markdownFilename(currentReport.url, 'codex-seo-plan'));
+  });
+  $('#download-master-prompt').addEventListener('click', () => {
+    if (!currentReport) return;
+    saveBlob(new Blob([masterPrompt(currentReport)], { type: 'text/markdown;charset=utf-8' }), markdownFilename(currentReport.url, 'codex-seo-plan'));
+  });
+  $('#issues-list').addEventListener('click', (event) => {
+    const groupButton = (event.target as HTMLElement).closest<HTMLElement>('[data-copy-issue-group]');
+    if (groupButton && currentReport) {
+      const ids = decodeURIComponent(groupButton.dataset.copyIssueGroup || '').split(',');
+      const group = currentReport.issues.filter((issue) => ids.includes(issue.id));
+      if (group.length) copyText(buildGroupedIssuePrompt(group, currentReport.url));
+      return;
+    }
+    const button = (event.target as HTMLElement).closest<HTMLElement>('[data-copy-issue]');
+    if (!button || !currentReport) return;
+    const item = currentReport.issues.find((issue) => issue.id === button.dataset.copyIssue);
+    if (item) copyText(item.codexPrompt);
+  });
+  $('#intent-map').addEventListener('click', (event) => { const button = (event.target as HTMLElement).closest<HTMLElement>('[data-copy-intent]'); if (!button) return; const prompts = JSON.parse($('#intent-map').dataset.prompts || '[]') as string[]; const prompt = prompts[Number(button.dataset.copyIntent)]; if (prompt) copyText(prompt); });
+  $('#issues-list').addEventListener('change', (event) => {
+    const groupCheckbox = (event.target as HTMLElement).closest<HTMLInputElement>('[data-resolve-group]');
+    if (groupCheckbox && currentReport) {
+      const ids = decodeURIComponent(groupCheckbox.dataset.resolveGroup || '').split(',');
+      currentReport.issues.filter((issue) => ids.includes(issue.id)).forEach((issue) => groupCheckbox.checked ? resolvedIssues.add(issueFingerprint(issue)) : resolvedIssues.delete(issueFingerprint(issue)));
+      localStorage.setItem(resolvedKey(currentReport), JSON.stringify([...resolvedIssues])); renderIssues(); return;
+    }
+    const checkbox = (event.target as HTMLElement).closest<HTMLInputElement>('[data-resolve-issue]');
+    if (!checkbox || !currentReport) return;
+    const item = currentReport.issues.find((issue) => issue.id === checkbox.dataset.resolveIssue);
+    if (!item) return;
+    const fingerprint = issueFingerprint(item);
+    checkbox.checked ? resolvedIssues.add(fingerprint) : resolvedIssues.delete(fingerprint);
+    localStorage.setItem(resolvedKey(currentReport), JSON.stringify([...resolvedIssues]));
+    renderIssues();
+  });
+  $('#download-pdf').addEventListener('click', async () => {
+    if (!currentReport) return;
+    const button = $('#download-pdf') as HTMLButtonElement;
+    button.disabled = true; button.textContent = 'Готовим PDF…';
+    try {
+      const pdfReport = {
+        ...currentReport,
+        issues: currentReport.issues.map(({ codexPrompt: _prompt, solutionSteps: _steps, ...item }) => item),
+        pages: currentReport.pages.map((page) => ({
+          ...page,
+          issues: page.issues.map(({ codexPrompt: _prompt, solutionSteps: _steps, ...item }) => item),
+          contentAnalysis: { ...contentFor(page), codexPrompt: '', checks: contentFor(page).checks.map(({ codexPrompt: _prompt, ...check }) => check) },
+        })),
+      };
+      const response = await fetch('/api/pdf', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(pdfReport) });
+      if (!response.ok) { const error = await response.json().catch(() => ({})); throw new Error(error.error || 'Не удалось создать PDF'); }
+      const blob = await response.blob();
+      saveBlob(blob, `seo-audit-${new URL(currentReport.url).hostname}.pdf`);
+    } catch (error) { window.alert(error instanceof Error ? error.message : 'Не удалось создать PDF'); }
+    finally { button.disabled = false; button.innerHTML = '<svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Скачать PDF'; }
+  });
+  const savedRules = localStorage.getItem('sitescan:custom-rules'); if (savedRules) ($('#custom-rules') as HTMLTextAreaElement).value = savedRules;
+  $('#run-custom-rules').addEventListener('click', runCustomRules);
+  $('#custom-rules-report').addEventListener('click', (event) => { const button = (event.target as HTMLElement).closest<HTMLElement>('[data-copy-custom]'); if (button) copyText(customRulePrompts[Number(button.dataset.copyCustom)] || ''); });
+  $('#link-opportunities').addEventListener('click', (event) => { const button = (event.target as HTMLElement).closest<HTMLElement>('[data-copy-link]'); if (!button) return; try { const prompts = JSON.parse($('#link-opportunities').dataset.prompts || '[]'); copyText(prompts[Number(button.dataset.copyLink)] || ''); } catch {} });
+  $('#verify-fixes').addEventListener('click', () => { if (currentReport) run({ url: currentReport.url, limit: currentReport.crawlLimit, keywords: currentReport.targetKeywords.join(', ') }); });
+  $('#competitor-import').addEventListener('change', async (event) => {
+    const file = (event.target as HTMLInputElement).files?.[0]; if (!file || !currentReport) return;
+    try {
+      const competitor = JSON.parse(await file.text()) as AuditReport; if (!Array.isArray(competitor.pages) || !Array.isArray(competitor.topTerms)) throw new Error('Это не полный JSON-отчёт SiteScan');
+      const own = new Set(currentReport.topTerms.map((item) => item.term.toLowerCase()));
+      const missing = competitor.topTerms.filter((item) => !own.has(item.term.toLowerCase())).sort((a, b) => b.count - a.count).slice(0, 30);
+      const ownTypes = new Set(currentReport.pages.map((page) => contentFor(page).pageType)); const missingTypes = [...new Set(competitor.pages.map((page) => contentFor(page).pageType).filter((type) => !ownTypes.has(type)))];
+      $('#content-gap-report').innerHTML = `<div class="mini-summary"><strong>${missing.length}</strong><span>тем отсутствуют среди главных терминов</span></div>${missingTypes.length ? `<p class="gap-types">Типы страниц конкурента, которых нет у вас: <strong>${missingTypes.map(escapeHtml).join(', ')}</strong></p>` : ''}${missing.map((item) => `<div class="tool-row"><div><strong>${escapeHtml(item.term)}</strong><span>${item.count} употреблений · ${item.pages || 1} страниц</span></div></div>`).join('') || '<p class="empty-state">Заметного разрыва по главным терминам не найдено.</p>'}`;
+    } catch (error) { $('#content-gap-report').innerHTML = `<p class="integration-error">${escapeHtml(error instanceof Error ? error.message : 'Не удалось разобрать отчёт')}</p>`; }
+  });
+  $('#log-import').addEventListener('change', async (event) => {
+    const file = (event.target as HTMLInputElement).files?.[0]; if (!file) return; const output = $('#log-report');
+    try {
+      if (file.size > 20_000_000) throw new Error('Файл больше 20 МБ'); const text = await file.text();
+      const bots: Record<string, number> = {}; const urls: Record<string, number> = {}; let parsed = 0; let botHits = 0; let errors = 0;
+      text.split(/\r?\n/).forEach((line) => { const match = line.match(/"(?:GET|HEAD|POST)\s+([^\s]+)\s+HTTP\/[^"]+"\s+(\d{3})\s+(?:\d+|-)\s+"[^"]*"\s+"([^"]*)"/i); if (!match) return; parsed++; const url = match[1] || '/'; const status = match[2] || '0'; const ua = match[3] || ''; if (Number(status) >= 400) errors++; const bot = ua.match(/(Googlebot|Bingbot|YandexBot|GPTBot|OAI-SearchBot|ChatGPT-User|ClaudeBot|PerplexityBot)/i)?.[1]; if (!bot) return; botHits++; bots[bot] = (bots[bot] || 0) + 1; urls[url] = (urls[url] || 0) + 1; });
+      const topUrls = Object.entries(urls).sort((a, b) => b[1] - a[1]).slice(0, 15);
+      output.innerHTML = `<div class="log-kpis"><div><strong>${parsed}</strong><span>строк</span></div><div><strong>${botHits}</strong><span>визитов ботов</span></div><div><strong>${errors}</strong><span>HTTP 4xx/5xx</span></div></div><p class="bot-breakdown">${Object.entries(bots).sort((a,b) => b[1]-a[1]).map(([name,count]) => `<span>${escapeHtml(name)} <strong>${count}</strong></span>`).join('') || 'Известные поисковые роботы не найдены.'}</p>${topUrls.map(([url, count]) => `<div class="tool-row"><div><strong>${escapeHtml(url)}</strong><span>${count} обращений роботов</span></div></div>`).join('')}`;
+    } catch (error) { output.innerHTML = `<p class="integration-error">${escapeHtml(error instanceof Error ? error.message : 'Не удалось разобрать лог')}</p>`; }
+  });
+  $('#rendered-import').addEventListener('change', async (event) => {
+    const file = (event.target as HTMLInputElement).files?.[0]; if (!file || !currentReport) return; const page = currentReport.pages[Number(($('#rendered-page') as HTMLSelectElement).value)]; if (!page) return;
+    try {
+      const doc = new DOMParser().parseFromString(await file.text(), 'text/html'); const cleanText = (doc.body?.textContent || '').replace(/\s+/g, ' ').trim(); const rendered = { title: doc.title.trim(), description: doc.querySelector<HTMLMetaElement>('meta[name="description"]')?.content.trim() || '', h1: [...doc.querySelectorAll('h1')].map((node) => node.textContent?.trim()).filter(Boolean).join(' | '), canonical: doc.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.href || '', robots: doc.querySelector<HTMLMetaElement>('meta[name="robots"]')?.content || '', words: cleanText ? cleanText.split(/\s+/).length : 0, links: doc.querySelectorAll('a[href]').length, schema: doc.querySelectorAll('script[type="application/ld+json"]').length };
+      const rows: Array<[string, unknown, unknown]> = [['Title', page.title, rendered.title], ['Description', page.description, rendered.description], ['H1', page.h1.join(' | '), rendered.h1], ['Canonical', page.canonical, rendered.canonical], ['Robots', page.robots, rendered.robots], ['Слова', page.wordCount, rendered.words], ['Ссылки', page.internalLinks + page.externalLinks, rendered.links], ['JSON-LD блоки', page.schemaTypes.length ? 'есть' : 0, rendered.schema]];
+      $('#rendered-report').innerHTML = `<div class="compare-table"><div class="compare-head"><span>Сигнал</span><span>Source</span><span>Rendered</span></div>${rows.map(([name, source, value]) => `<div class="${String(source) === String(value) ? '' : 'changed'}"><strong>${escapeHtml(name)}</strong><span>${escapeHtml(source)}</span><span>${escapeHtml(value)}</span></div>`).join('')}</div>`;
+    } catch (error) { $('#rendered-report').innerHTML = `<p class="integration-error">${escapeHtml(error instanceof Error ? error.message : 'Не удалось разобрать HTML')}</p>`; }
+  });
+  function setMonitoring(minutes: number | null) {
+    window.clearInterval(monitorTimer); monitorTimer = undefined; const button = $('#monitor-toggle') as HTMLButtonElement; const status = $('#monitor-status');
+    if (!minutes) { localStorage.removeItem('sitescan:monitor'); button.textContent = 'Включить'; status.textContent = 'Мониторинг выключен.'; return; }
+    localStorage.setItem('sitescan:monitor', String(minutes)); ($('#monitor-interval') as HTMLSelectElement).value = String(minutes); button.textContent = 'Выключить'; status.textContent = `Активен: следующий аудит примерно через ${minutes} мин. Оставьте вкладку открытой.`;
+    monitorTimer = window.setInterval(() => { if (currentReport && !activeController) run({ url: currentReport.url, limit: currentReport.crawlLimit, keywords: currentReport.targetKeywords.join(', ') }); }, minutes * 60_000);
+  }
+  $('#monitor-toggle').addEventListener('click', () => setMonitoring(monitorTimer ? null : Number(($('#monitor-interval') as HTMLSelectElement).value)));
+  const savedMonitor = Number(localStorage.getItem('sitescan:monitor')); if ([15,60,360,1440].includes(savedMonitor)) setMonitoring(savedMonitor);
+  renderHistory();
+</script>
+
+<style is:global>
+  @import '../styles/global.css';
+</style>

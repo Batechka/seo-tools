@@ -1,0 +1,347 @@
+- generic [ref=f1e1]:
+  - generic [ref=f1e2]:
+    - link "Перейти к основному содержанию" [ref=f1e3] [cursor=pointer]:
+      - /url: "#main-content"
+    - banner [ref=f1e4]:
+      - link "SiteScan — на главную" [ref=f1e5] [cursor=pointer]:
+        - /url: /
+        - generic [ref=f1e9]: SITESCAN
+      - generic [ref=f1e10]: Локальный инструментБез передачи истории
+    - main [ref=f1e13]:
+      - generic [ref=f1e14]:
+        - generic [ref=f1e15]:
+          - generic [ref=f1e16]: "01"
+          - text: Технический SEO-аудит
+        - generic [ref=f1e17]:
+          - generic [ref=f1e18]:
+            - heading "Увидеть сайт глазами поисковика." [level=1] [ref=f1e19]: Увидеть сайтглазами поисковика.
+            - paragraph [ref=f1e20]: SiteScan проходит по страницам, находит то, что мешает индексации и росту, расставляет задачи по приоритету и собирает понятный PDF-отчёт.
+          - generic "Возможности аудита" [ref=f1e21]:
+            - paragraph [ref=f1e22]: Проверяет
+            - list [ref=f1e23]:
+              - listitem [ref=f1e24]: Индексацию и техническое SEO
+              - listitem [ref=f1e27]: Мета-теги, контент и ссылки
+              - listitem [ref=f1e30]: Изображения и Schema.org
+              - listitem [ref=f1e33]: Готовность к AI-поиску
+        - generic [ref=f1e36]:
+          - generic [ref=f1e37]: Адрес сайта
+          - generic [ref=f1e38]:
+            - textbox "Адрес сайта" [ref=f1e43]:
+              - /placeholder: example.com или https://example.com
+            - generic [ref=f1e44]:
+              - generic [ref=f1e45]: Страниц
+              - combobox "Максимум страниц для проверки" [ref=f1e46]:
+                - option "10"
+                - option "25" [selected]
+                - option "50"
+                - option "100"
+            - button "Начать аудит" [ref=f1e47] [cursor=pointer]
+          - generic [ref=f1e53]:
+            - generic [ref=f1e54]:
+              - text: Целевые ключевые фразы
+              - generic [ref=f1e55]: необязательно, до 10 через запятую
+            - textbox "Целевые ключевые фразы необязательно, до 10 через запятую" [ref=f1e56]:
+              - /placeholder: "например: seo аудит, продвижение сайта, техническое seo"
+          - generic [ref=f1e57]:
+            - paragraph [ref=f1e58]: Запросы выполняются с вашего компьютера. Приватные адреса защищённо блокируются.
+            - button "Посмотреть пример отчёта" [ref=f1e62] [cursor=pointer]
+      - region "Этапы проверки" [ref=f1e63]:
+        - generic [ref=f1e64]:
+          - generic [ref=f1e65]: "01"
+          - strong [ref=f1e66]: Сканирование
+          - generic [ref=f1e67]: до 100 страниц
+        - generic [ref=f1e68]:
+          - generic [ref=f1e69]: "02"
+          - strong [ref=f1e70]: Диагностика
+          - generic [ref=f1e71]: более 100 сигналов
+        - generic [ref=f1e72]:
+          - generic [ref=f1e73]: "03"
+          - strong [ref=f1e74]: Приоритеты
+          - generic [ref=f1e75]: что исправлять первым
+        - generic [ref=f1e76]:
+          - generic [ref=f1e77]: "04"
+          - strong [ref=f1e78]: PDF-отчёт
+          - generic [ref=f1e79]: готов к сохранению
+      - generic [ref=f1e114]:
+        - generic [ref=f1e115]:
+          - generic [ref=f1e121]:
+            - generic [ref=f1e122]: ЛОКАЛЬНАЯ ИСТОРИЯ
+            - heading "Последние аудиты" [level=2] [ref=f1e123]
+          - button "Очистить" [ref=f1e125] [cursor=pointer]
+        - article [ref=f1e127]:
+          - generic [ref=f1e128]: "68"
+          - generic [ref=f1e129]:
+            - strong [ref=f1e130]: example-store.ru
+            - paragraph [ref=f1e131]: 31 авг., 12:15 · 3 стр. · 6 ошибок
+          - generic [ref=f1e132]: первый
+          - generic [ref=f1e133]:
+            - button "Открыть" [ref=f1e134] [cursor=pointer]
+            - button "↻ Повторить" [ref=f1e135] [cursor=pointer]
+      - generic [ref=f1e136]:
+        - generic [ref=f1e137]:
+          - generic [ref=f1e138]:
+            - paragraph [ref=f1e139]:
+              - generic [ref=f1e140]: REPORT
+              - text: Аудит завершён
+            - heading "SEO-здоровье сайта" [level=2] [ref=f1e141]
+            - paragraph [ref=f1e142]: https://example-store.ru/
+          - generic [ref=f1e143]:
+            - button "Новый аудит" [ref=f1e144] [cursor=pointer]
+            - button "Скачать данные отчёта в JSON" [ref=f1e148] [cursor=pointer]
+            - button "Скачать таблицу страниц в CSV" [ref=f1e152] [cursor=pointer]
+            - button "Скачать план исправлений для Codex" [ref=f1e156] [cursor=pointer]
+            - button "Скачать PDF" [ref=f1e160] [cursor=pointer]
+        - generic [ref=f1e164]:
+          - generic [ref=f1e165]:
+            - generic [ref=f1e166]:
+              - strong [ref=f1e167]: "68"
+              - generic [ref=f1e168]: / 100
+            - generic [ref=f1e169]:
+              - generic [ref=f1e170]: C
+              - heading "Есть заметный потенциал" [level=3] [ref=f1e171]
+              - paragraph [ref=f1e172]: Начните с индексации и критичных технических ошибок — они сильнее всего мешают росту.
+          - generic [ref=f1e173]:
+            - generic [ref=f1e174]:
+              - term [ref=f1e175]: Проверено
+              - definition [ref=f1e176]: "3"
+              - text: страниц
+            - generic [ref=f1e177]:
+              - term [ref=f1e178]: Критично
+              - definition [ref=f1e179]: "1"
+              - text: ошибок
+            - generic [ref=f1e180]:
+              - term [ref=f1e181]: Высокий риск
+              - definition [ref=f1e182]: "2"
+              - text: ошибок
+            - generic [ref=f1e183]:
+              - term [ref=f1e184]: Время
+              - definition [ref=f1e185]: "6.8"
+              - text: секунд
+        - tablist "Разделы отчёта" [ref=f1e186]:
+          - tab "Обзор" [ref=f1e187] [cursor=pointer]
+          - tab "Все ошибки 6" [ref=f1e188] [cursor=pointer]
+          - tab "Ключи и контент" [ref=f1e189] [cursor=pointer]
+          - tab "Страницы" [ref=f1e190] [cursor=pointer]
+          - tab "Архитектура" [ref=f1e191] [cursor=pointer]
+          - tab "Техническое" [ref=f1e192] [cursor=pointer]
+          - tab "Инструменты" [selected] [ref=f1e193] [cursor=pointer]
+        - tabpanel [ref=f1e443]:
+          - generic [ref=f1e445]:
+            - text: PRODUCT LAB
+            - heading "Рабочая зона SEO-специалиста" [level=3] [ref=f1e446]
+            - paragraph [ref=f1e447]: "Тринадцать инструментов поверх краулинга: от карты интентов и логов до контроля исправлений."
+          - generic [ref=f1e451]:
+            - generic [ref=f1e452]:
+              - generic [ref=f1e453]: Доступность
+              - strong [ref=f1e454]: "81"
+            - generic [ref=f1e455]:
+              - generic [ref=f1e456]: Schema coverage
+              - strong [ref=f1e457]: 100%
+            - generic [ref=f1e458]:
+              - generic [ref=f1e459]: Новых ссылок
+              - strong [ref=f1e460]: "3"
+            - generic [ref=f1e461]:
+              - generic [ref=f1e462]: Исправлено
+              - strong [ref=f1e463]: "0"
+          - generic [ref=f1e464]:
+            - generic [ref=f1e465]:
+              - generic [ref=f1e466]:
+                - generic [ref=f1e467]:
+                  - text: CHANGE TRACKING
+                  - heading "Что изменилось между аудитами" [level=3] [ref=f1e468]
+                - button "Проверить исправления" [ref=f1e469] [cursor=pointer]
+              - paragraph [ref=f1e471]: Это первый полный аудит сайта. Следующий запуск покажет изменения каждой страницы.
+            - generic [ref=f1e472]:
+              - generic [ref=f1e474]:
+                - text: KEYWORD CLUSTERS
+                - heading "Кластеры тем и интенты" [level=3] [ref=f1e475]
+              - generic [ref=f1e476]:
+                - generic [ref=f1e477]:
+                  - generic [ref=f1e478]:
+                    - strong [ref=f1e479]: товары для дома
+                    - generic [ref=f1e480]: 4 фраз · 3 релевантных страниц
+                  - generic [ref=f1e481]: товары для дома · Example Store — товары для дома · Каталог товаров — Example Store · товары
+                - generic [ref=f1e482]:
+                  - generic [ref=f1e483]:
+                    - strong [ref=f1e484]: доставка
+                    - generic [ref=f1e485]: 1 фраз · 3 релевантных страниц
+                  - generic [ref=f1e486]: доставка
+                - generic [ref=f1e487]:
+                  - generic [ref=f1e488]:
+                    - strong [ref=f1e489]: интерьер
+                    - generic [ref=f1e490]: 1 фраз · 3 релевантных страниц
+                  - generic [ref=f1e491]: интерьер
+                - generic [ref=f1e492]:
+                  - generic [ref=f1e493]:
+                    - strong [ref=f1e494]: оплата
+                    - generic [ref=f1e495]: 1 фраз · 0 релевантных страниц
+                  - generic [ref=f1e496]: оплата
+            - generic [ref=f1e497]:
+              - generic [ref=f1e499]:
+                - text: INTENT MAP
+                - heading "Карта интентов и каннибализация" [level=3] [ref=f1e500]
+              - paragraph [ref=f1e501]: SiteScan назначает вероятную целевую страницу для каждого заданного ключа. Решение нужно подтвердить Wordstat, Search Console и ручной проверкой выдачи.
+              - generic [ref=f1e502]:
+                - generic [ref=f1e503]:
+                  - generic [ref=f1e504]:
+                    - strong [ref=f1e505]: товары для дома
+                    - generic [ref=f1e506]: example-store.ru
+                  - generic [ref=f1e507]: Целевая страница найдена
+                  - button "Промпт" [active] [ref=f1e508] [cursor=pointer]
+                - generic [ref=f1e509]:
+                  - generic [ref=f1e510]:
+                    - strong [ref=f1e511]: доставка
+                    - generic [ref=f1e512]: example-store.ru/delivery
+                  - generic [ref=f1e513]: Целевая страница найдена
+                  - button "Промпт" [ref=f1e514] [cursor=pointer]
+            - generic [ref=f1e515]:
+              - generic [ref=f1e517]:
+                - text: SCHEMA INSPECTOR
+                - heading "Разметка по страницам" [level=3] [ref=f1e518]
+              - generic [ref=f1e519]:
+                - generic [ref=f1e520]:
+                  - generic [ref=f1e521]:
+                    - strong [ref=f1e522]: example-store.ru
+                    - generic [ref=f1e523]: Organization, WebSite
+                  - generic [ref=f1e524]: валидно
+                - generic [ref=f1e525]:
+                  - generic [ref=f1e526]:
+                    - strong [ref=f1e527]: example-store.ru/catalog
+                    - generic [ref=f1e528]: Organization, WebSite
+                  - generic [ref=f1e529]: валидно
+                - generic [ref=f1e530]:
+                  - generic [ref=f1e531]:
+                    - strong [ref=f1e532]: example-store.ru/delivery
+                    - generic [ref=f1e533]: Organization, WebSite
+                  - generic [ref=f1e534]: валидно
+            - generic [ref=f1e535]:
+              - generic [ref=f1e537]:
+                - text: INTERNAL LINKS
+                - heading "Карта и новые связи" [level=3] [ref=f1e538]
+              - img "Граф внутренних ссылок" [ref=f1e539]:
+                - generic "https://example-store.ru/" [ref=f1e544]: example-store.ru
+                - generic "https://example-store.ru/catalog" [ref=f1e547]: ample-store.ru/catalog
+                - generic "https://example-store.ru/delivery" [ref=f1e550]: mple-store.ru/delivery
+              - generic [ref=f1e553]:
+                - generic [ref=f1e554]:
+                  - generic [ref=f1e555]:
+                    - strong [ref=f1e556]: example-store.ru/delivery → example-store.ru/catalog
+                    - generic [ref=f1e557]: "Общие темы: товары, доставка, интерьер"
+                  - button "Промпт" [ref=f1e558] [cursor=pointer]
+                - generic [ref=f1e559]:
+                  - generic [ref=f1e560]:
+                    - strong [ref=f1e561]: example-store.ru/catalog → example-store.ru/delivery
+                    - generic [ref=f1e562]: "Общие темы: товары, доставка, интерьер"
+                  - button "Промпт" [ref=f1e563] [cursor=pointer]
+                - generic [ref=f1e564]:
+                  - generic [ref=f1e565]:
+                    - strong [ref=f1e566]: example-store.ru → example-store.ru/delivery
+                    - generic [ref=f1e567]: "Общие темы: товары, доставка, интерьер"
+                  - button "Промпт" [ref=f1e568] [cursor=pointer]
+            - generic [ref=f1e569]:
+              - generic [ref=f1e571]:
+                - text: ACCESSIBILITY
+                - heading "Доступность контента" [level=3] [ref=f1e572]
+              - generic [ref=f1e573]:
+                - generic [ref=f1e574]:
+                  - strong [ref=f1e575]: "7"
+                  - generic [ref=f1e576]: наблюдаемых проблем
+                - generic [ref=f1e578]:
+                  - strong [ref=f1e579]: example-store.ru/catalog
+                  - generic [ref=f1e580]: 7 проблем · alt 7 · формы 0 · ссылки 0 · заголовки 0
+            - generic [ref=f1e581]:
+              - generic [ref=f1e582]:
+                - generic [ref=f1e583]:
+                  - text: CONTENT GAP
+                  - heading "Сравнение с конкурентом" [level=3] [ref=f1e584]
+                - generic [ref=f1e585] [cursor=pointer]:
+                  - text: Импорт JSON
+                  - button "Импорт JSON"
+              - paragraph [ref=f1e586]: Загрузите JSON-отчёт SiteScan конкурента.
+              - paragraph [ref=f1e588]: Отчёт конкурента ещё не загружен.
+            - generic [ref=f1e589]:
+              - generic [ref=f1e591]:
+                - text: CUSTOM RULES
+                - heading "Собственные проверки" [level=3] [ref=f1e592]
+              - textbox "Пользовательские правила" [ref=f1e593]: titleLength >= 30 descriptionLength >= 70 wordCount >= 300 imagesMissingAlt = 0 indexable = true
+              - button "Запустить правила" [ref=f1e594] [cursor=pointer]
+              - generic [ref=f1e595]:
+                - generic [ref=f1e596]:
+                  - strong [ref=f1e597]: "6"
+                  - generic [ref=f1e598]: нарушений на 3 страницах
+                - generic [ref=f1e599]:
+                  - generic [ref=f1e600]:
+                    - strong [ref=f1e601]: example-store.ru/delivery
+                    - generic [ref=f1e602]: titleLength >= 30 · сейчас 0
+                  - button "Промпт" [ref=f1e603] [cursor=pointer]
+                - generic [ref=f1e604]:
+                  - generic [ref=f1e605]:
+                    - strong [ref=f1e606]: example-store.ru
+                    - generic [ref=f1e607]: descriptionLength >= 70 · сейчас 53
+                  - button "Промпт" [ref=f1e608] [cursor=pointer]
+                - generic [ref=f1e609]:
+                  - generic [ref=f1e610]:
+                    - strong [ref=f1e611]: example-store.ru/catalog
+                    - generic [ref=f1e612]: descriptionLength >= 70 · сейчас 53
+                  - button "Промпт" [ref=f1e613] [cursor=pointer]
+                - generic [ref=f1e614]:
+                  - generic [ref=f1e615]:
+                    - strong [ref=f1e616]: example-store.ru/delivery
+                    - generic [ref=f1e617]: descriptionLength >= 70 · сейчас 53
+                  - button "Промпт" [ref=f1e618] [cursor=pointer]
+                - generic [ref=f1e619]:
+                  - generic [ref=f1e620]:
+                    - strong [ref=f1e621]: example-store.ru/catalog
+                    - generic [ref=f1e622]: imagesMissingAlt = 0 · сейчас 7
+                  - button "Промпт" [ref=f1e623] [cursor=pointer]
+                - generic [ref=f1e624]:
+                  - generic [ref=f1e625]:
+                    - strong [ref=f1e626]: example-store.ru/catalog
+                    - generic [ref=f1e627]: indexable = true · сейчас false
+                  - button "Промпт" [ref=f1e628] [cursor=pointer]
+            - generic [ref=f1e629]:
+              - generic [ref=f1e630]:
+                - generic [ref=f1e631]:
+                  - text: SERVER LOGS
+                  - heading "Поисковые роботы в логах" [level=3] [ref=f1e632]
+                - generic [ref=f1e633] [cursor=pointer]:
+                  - text: Импорт лога
+                  - button "Импорт лога"
+              - paragraph [ref=f1e634]: Common/Combined access log, до 20 МБ. Обрабатывается локально.
+              - paragraph [ref=f1e636]: Лог ещё не загружен.
+            - generic [ref=f1e637]:
+              - generic [ref=f1e639]:
+                - text: RENDERED HTML
+                - heading "Исходный и отрисованный DOM" [level=3] [ref=f1e640]
+              - combobox "Страница для сравнения" [ref=f1e641]:
+                - option "example-store.ru" [selected]
+                - option "example-store.ru/catalog"
+                - option "example-store.ru/delivery"
+              - generic [ref=f1e642] [cursor=pointer]:
+                - text: Загрузить сохранённый HTML после выполнения JavaScript
+                - button "Загрузить сохранённый HTML после выполнения JavaScript" [ref=f1e643]
+              - paragraph [ref=f1e644]: Сохраните отрисованный DOM в DevTools. SiteScan сравнит title, H1, canonical, robots, текст и ссылки.
+              - paragraph [ref=f1e646]: Выберите страницу и загрузите её отрисованный HTML.
+            - generic [ref=f1e647]:
+              - generic [ref=f1e649]:
+                - text: MONITORING
+                - heading "Контроль по расписанию" [level=3] [ref=f1e650]
+              - generic [ref=f1e651]:
+                - combobox "Интервал мониторинга" [ref=f1e652]:
+                  - option "каждые 15 минут" [selected]
+                  - option "каждый час"
+                  - option "каждые 6 часов"
+                  - option "раз в сутки"
+                - button "Включить" [ref=f1e653] [cursor=pointer]
+              - paragraph [ref=f1e654]: Локальный режим работает, пока эта вкладка SiteScan открыта.
+              - generic [ref=f1e655]: Мониторинг выключен.
+    - contentinfo [ref=f1e80]:
+      - generic [ref=f1e81]: SITESCAN
+      - paragraph [ref=f1e86]: Локальный SEO-аудитор. Без аккаунтов и трекеров. История хранится только в вашем браузере.
+      - generic [ref=f1e87]: v2.0
+    - status [ref=f1e656]: Промпт скопирован
+  - generic [ref=f1e90]:
+    - button [ref=f1e91]
+    - button [ref=f1e97]
+    - button [ref=f1e101]
+    - button [ref=f1e109]

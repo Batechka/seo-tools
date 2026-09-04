@@ -1,0 +1,212 @@
+- generic [ref=f1e1]:
+  - generic [ref=f1e2]:
+    - link "Перейти к основному содержанию" [ref=f1e3] [cursor=pointer]:
+      - /url: "#main-content"
+    - banner [ref=f1e4]:
+      - link "SiteScan — на главную" [ref=f1e5] [cursor=pointer]:
+        - /url: /
+        - generic [ref=f1e9]: SITESCAN
+      - generic [ref=f1e10]: Локальный инструментБез передачи истории
+    - main [ref=f1e13]:
+      - generic [ref=f1e14]:
+        - generic [ref=f1e15]:
+          - generic [ref=f1e16]: "01"
+          - text: Технический SEO-аудит
+        - generic [ref=f1e17]:
+          - generic [ref=f1e18]:
+            - heading "Увидеть сайт глазами поисковика." [level=1] [ref=f1e19]: Увидеть сайтглазами поисковика.
+            - paragraph [ref=f1e20]: SiteScan проходит по страницам, находит то, что мешает индексации и росту, расставляет задачи по приоритету и собирает понятный PDF-отчёт.
+          - generic "Возможности аудита" [ref=f1e21]:
+            - paragraph [ref=f1e22]: Проверяет
+            - list [ref=f1e23]:
+              - listitem [ref=f1e24]: Индексацию и техническое SEO
+              - listitem [ref=f1e27]: Мета-теги, контент и ссылки
+              - listitem [ref=f1e30]: Изображения и Schema.org
+              - listitem [ref=f1e33]: Готовность к AI-поиску
+        - generic [ref=f1e36]:
+          - generic [ref=f1e37]: Адрес сайта
+          - generic [ref=f1e38]:
+            - textbox "Адрес сайта" [ref=f1e43]:
+              - /placeholder: example.com или https://example.com
+            - generic [ref=f1e44]:
+              - generic [ref=f1e45]: Страниц
+              - combobox "Максимум страниц для проверки" [ref=f1e46]:
+                - option "10"
+                - option "25" [selected]
+                - option "50"
+                - option "100"
+            - button "Начать аудит" [ref=f1e47] [cursor=pointer]
+          - generic [ref=f1e53]:
+            - generic [ref=f1e54]:
+              - text: Целевые ключевые фразы
+              - generic [ref=f1e55]: необязательно, до 10 через запятую
+            - textbox "Целевые ключевые фразы необязательно, до 10 через запятую" [ref=f1e56]:
+              - /placeholder: "например: seo аудит, продвижение сайта, техническое seo"
+          - generic [ref=f1e57]:
+            - paragraph [ref=f1e58]: Запросы выполняются с вашего компьютера. Приватные адреса защищённо блокируются.
+            - button "Посмотреть пример отчёта" [active] [ref=f1e62] [cursor=pointer]
+      - region "Этапы проверки" [ref=f1e63]:
+        - generic [ref=f1e64]:
+          - generic [ref=f1e65]: "01"
+          - strong [ref=f1e66]: Сканирование
+          - generic [ref=f1e67]: до 100 страниц
+        - generic [ref=f1e68]:
+          - generic [ref=f1e69]: "02"
+          - strong [ref=f1e70]: Диагностика
+          - generic [ref=f1e71]: более 100 сигналов
+        - generic [ref=f1e72]:
+          - generic [ref=f1e73]: "03"
+          - strong [ref=f1e74]: Приоритеты
+          - generic [ref=f1e75]: что исправлять первым
+        - generic [ref=f1e76]:
+          - generic [ref=f1e77]: "04"
+          - strong [ref=f1e78]: PDF-отчёт
+          - generic [ref=f1e79]: готов к сохранению
+      - generic [ref=f1e114]:
+        - generic [ref=f1e115]:
+          - generic [ref=f1e121]:
+            - generic [ref=f1e122]: ЛОКАЛЬНАЯ ИСТОРИЯ
+            - heading "Последние аудиты" [level=2] [ref=f1e123]
+          - button "Очистить" [ref=f1e125] [cursor=pointer]
+        - article [ref=f1e127]:
+          - generic [ref=f1e128]: "68"
+          - generic [ref=f1e129]:
+            - strong [ref=f1e130]: example-store.ru
+            - paragraph [ref=f1e131]: 31 авг., 12:15 · 3 стр. · 6 ошибок
+          - generic [ref=f1e132]: первый
+          - generic [ref=f1e133]:
+            - button "Открыть" [ref=f1e134] [cursor=pointer]
+            - button "↻ Повторить" [ref=f1e135] [cursor=pointer]
+      - generic [ref=f1e136]:
+        - generic [ref=f1e137]:
+          - generic [ref=f1e138]:
+            - paragraph [ref=f1e139]:
+              - generic [ref=f1e140]: REPORT
+              - text: Аудит завершён
+            - heading "SEO-здоровье сайта" [level=2] [ref=f1e141]
+            - paragraph [ref=f1e142]: https://example-store.ru/
+          - generic [ref=f1e143]:
+            - button "Новый аудит" [ref=f1e144] [cursor=pointer]
+            - button "Скачать данные отчёта в JSON" [ref=f1e148] [cursor=pointer]
+            - button "Скачать таблицу страниц в CSV" [ref=f1e152] [cursor=pointer]
+            - button "Скачать план исправлений для Codex" [ref=f1e156] [cursor=pointer]
+            - button "Скачать PDF" [ref=f1e160] [cursor=pointer]
+        - generic [ref=f1e164]:
+          - generic [ref=f1e165]:
+            - generic [ref=f1e166]:
+              - strong [ref=f1e167]: "68"
+              - generic [ref=f1e168]: / 100
+            - generic [ref=f1e169]:
+              - generic [ref=f1e170]: C
+              - heading "Есть заметный потенциал" [level=3] [ref=f1e171]
+              - paragraph [ref=f1e172]: Начните с индексации и критичных технических ошибок — они сильнее всего мешают росту.
+          - generic [ref=f1e173]:
+            - generic [ref=f1e174]:
+              - term [ref=f1e175]: Проверено
+              - definition [ref=f1e176]: "3"
+              - text: страниц
+            - generic [ref=f1e177]:
+              - term [ref=f1e178]: Критично
+              - definition [ref=f1e179]: "1"
+              - text: ошибок
+            - generic [ref=f1e180]:
+              - term [ref=f1e181]: Высокий риск
+              - definition [ref=f1e182]: "2"
+              - text: ошибок
+            - generic [ref=f1e183]:
+              - term [ref=f1e184]: Время
+              - definition [ref=f1e185]: "6.8"
+              - text: секунд
+        - tablist "Разделы отчёта" [ref=f1e186]:
+          - tab "Обзор" [selected] [ref=f1e187] [cursor=pointer]
+          - tab "Все ошибки 6" [ref=f1e188] [cursor=pointer]
+          - tab "Ключи и контент" [ref=f1e189] [cursor=pointer]
+          - tab "Страницы" [ref=f1e190] [cursor=pointer]
+          - tab "Архитектура" [ref=f1e191] [cursor=pointer]
+          - tab "Техническое" [ref=f1e192] [cursor=pointer]
+          - tab "Инструменты" [ref=f1e193] [cursor=pointer]
+        - tabpanel [ref=f1e194]:
+          - generic [ref=f1e195]:
+            - generic [ref=f1e196]:
+              - generic [ref=f1e198]:
+                - text: ОЦЕНКИ
+                - heading "По направлениям" [level=3] [ref=f1e199]
+              - generic [ref=f1e203]:
+                - generic [ref=f1e205]:
+                  - generic [ref=f1e206]: Индексация
+                  - strong [ref=f1e207]: "42"
+                - generic [ref=f1e211]:
+                  - generic [ref=f1e212]: On-page SEO
+                  - strong [ref=f1e213]: "66"
+                - generic [ref=f1e217]:
+                  - generic [ref=f1e218]: Контент
+                  - strong [ref=f1e219]: "92"
+                - generic [ref=f1e223]:
+                  - generic [ref=f1e224]: Внутренние ссылки
+                  - strong [ref=f1e225]: "88"
+                - generic [ref=f1e229]:
+                  - generic [ref=f1e230]: Изображения
+                  - strong [ref=f1e231]: "74"
+                - generic [ref=f1e235]:
+                  - generic [ref=f1e236]: Schema.org
+                  - strong [ref=f1e237]: "91"
+                - generic [ref=f1e241]:
+                  - generic [ref=f1e242]: Скорость и UX
+                  - strong [ref=f1e243]: "71"
+                - generic [ref=f1e247]:
+                  - generic [ref=f1e248]: Соцсети
+                  - strong [ref=f1e249]: "96"
+                - generic [ref=f1e253]:
+                  - generic [ref=f1e254]: AI-поиск
+                  - strong [ref=f1e255]: "80"
+            - generic [ref=f1e258]:
+              - generic [ref=f1e260]:
+                - text: ПЛАН РАБОТ
+                - heading "Сначала исправьте это" [level=3] [ref=f1e261]
+              - generic [ref=f1e265]:
+                - article [ref=f1e266]:
+                  - generic [ref=f1e268]:
+                    - generic [ref=f1e269]:
+                      - generic [ref=f1e270]: Критично
+                      - generic [ref=f1e271]: Индексация
+                    - heading "Страница закрыта noindex" [level=4] [ref=f1e272]
+                    - paragraph [ref=f1e273]: Каталог товаров исключён из индексации директивой robots.
+                    - link "example-store.ru/catalog" [ref=f1e274] [cursor=pointer]:
+                      - /url: https://example-store.ru/catalog
+                - article [ref=f1e275]:
+                  - generic [ref=f1e277]:
+                    - generic [ref=f1e278]:
+                      - generic [ref=f1e279]: Высокий
+                      - generic [ref=f1e280]: On-page SEO
+                    - heading "Отсутствует title" [level=4] [ref=f1e281]
+                    - paragraph [ref=f1e282]: У страницы доставки нет собственного заголовка документа.
+                    - link "example-store.ru/delivery" [ref=f1e283] [cursor=pointer]:
+                      - /url: https://example-store.ru/delivery
+                - article [ref=f1e284]:
+                  - generic [ref=f1e286]:
+                    - generic [ref=f1e287]:
+                      - generic [ref=f1e288]: Высокий
+                      - generic [ref=f1e289]: Индексация
+                    - heading "sitemap.xml не найден" [level=4] [ref=f1e290]
+                    - paragraph [ref=f1e291]: Карта сайта вернула HTTP 404.
+                    - link "example-store.ru" [ref=f1e292] [cursor=pointer]:
+                      - /url: https://example-store.ru/
+                - article [ref=f1e293]:
+                  - generic [ref=f1e295]:
+                    - generic [ref=f1e296]:
+                      - generic [ref=f1e297]: Средний
+                      - generic [ref=f1e298]: Изображения
+                    - heading "У изображений нет alt" [level=4] [ref=f1e299]
+                    - paragraph [ref=f1e300]: У 7 карточек товаров отсутствует текстовая альтернатива.
+                    - link "example-store.ru/catalog" [ref=f1e301] [cursor=pointer]:
+                      - /url: https://example-store.ru/catalog
+              - button "Показать все ошибки" [ref=f1e302] [cursor=pointer]
+    - contentinfo [ref=f1e80]:
+      - generic [ref=f1e81]: SITESCAN
+      - paragraph [ref=f1e86]: Локальный SEO-аудитор. Без аккаунтов и трекеров. История хранится только в вашем браузере.
+      - generic [ref=f1e87]: v2.0
+  - generic [ref=f1e90]:
+    - button [ref=f1e91]
+    - button [ref=f1e97]
+    - button [ref=f1e101]
+    - button [ref=f1e109]

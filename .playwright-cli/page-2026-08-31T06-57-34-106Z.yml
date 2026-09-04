@@ -1,0 +1,292 @@
+- generic [ref=f1e1]:
+  - generic [ref=f1e2]:
+    - link "Перейти к основному содержанию" [ref=f1e3] [cursor=pointer]:
+      - /url: "#main-content"
+    - banner [ref=f1e4]:
+      - link "SiteScan — на главную" [ref=f1e5] [cursor=pointer]:
+        - /url: /
+        - generic [ref=f1e9]: SITESCAN
+      - generic [ref=f1e10]: Локальный инструментБез передачи истории
+    - main [ref=f1e13]:
+      - generic [ref=f1e14]:
+        - generic [ref=f1e15]:
+          - generic [ref=f1e16]: "01"
+          - text: Технический SEO-аудит
+        - generic [ref=f1e17]:
+          - generic [ref=f1e18]:
+            - heading "Увидеть сайт глазами поисковика." [level=1] [ref=f1e19]: Увидеть сайтглазами поисковика.
+            - paragraph [ref=f1e20]: SiteScan проходит по страницам, находит то, что мешает индексации и росту, расставляет задачи по приоритету и собирает понятный PDF-отчёт.
+          - generic "Возможности аудита" [ref=f1e21]:
+            - paragraph [ref=f1e22]: Проверяет
+            - list [ref=f1e23]:
+              - listitem [ref=f1e24]: Индексацию и техническое SEO
+              - listitem [ref=f1e27]: Мета-теги, контент и ссылки
+              - listitem [ref=f1e30]: Изображения и Schema.org
+              - listitem [ref=f1e33]: Готовность к AI-поиску
+        - generic [ref=f1e36]:
+          - generic [ref=f1e37]: Адрес сайта
+          - generic [ref=f1e38]:
+            - textbox "Адрес сайта" [ref=f1e43]:
+              - /placeholder: example.com или https://example.com
+            - generic [ref=f1e44]:
+              - generic [ref=f1e45]: Страниц
+              - combobox "Максимум страниц для проверки" [ref=f1e46]:
+                - option "10"
+                - option "25" [selected]
+                - option "50"
+                - option "100"
+            - button "Начать аудит" [ref=f1e47] [cursor=pointer]
+          - generic [ref=f1e53]:
+            - generic [ref=f1e54]:
+              - text: Целевые ключевые фразы
+              - generic [ref=f1e55]: необязательно, до 10 через запятую
+            - textbox "Целевые ключевые фразы необязательно, до 10 через запятую" [ref=f1e56]:
+              - /placeholder: "например: seo аудит, продвижение сайта, техническое seo"
+          - generic [ref=f1e57]:
+            - paragraph [ref=f1e58]: Запросы выполняются с вашего компьютера. Приватные адреса защищённо блокируются.
+            - button "Посмотреть пример отчёта" [ref=f1e62] [cursor=pointer]
+      - region "Этапы проверки" [ref=f1e63]:
+        - generic [ref=f1e64]:
+          - generic [ref=f1e65]: "01"
+          - strong [ref=f1e66]: Сканирование
+          - generic [ref=f1e67]: до 100 страниц
+        - generic [ref=f1e68]:
+          - generic [ref=f1e69]: "02"
+          - strong [ref=f1e70]: Диагностика
+          - generic [ref=f1e71]: более 100 сигналов
+        - generic [ref=f1e72]:
+          - generic [ref=f1e73]: "03"
+          - strong [ref=f1e74]: Приоритеты
+          - generic [ref=f1e75]: что исправлять первым
+        - generic [ref=f1e76]:
+          - generic [ref=f1e77]: "04"
+          - strong [ref=f1e78]: PDF-отчёт
+          - generic [ref=f1e79]: готов к сохранению
+      - generic [ref=f1e114]:
+        - generic [ref=f1e115]:
+          - generic [ref=f1e121]:
+            - generic [ref=f1e122]: ЛОКАЛЬНАЯ ИСТОРИЯ
+            - heading "Последние аудиты" [level=2] [ref=f1e123]
+          - button "Очистить" [ref=f1e125] [cursor=pointer]
+        - article [ref=f1e127]:
+          - generic [ref=f1e128]: "68"
+          - generic [ref=f1e129]:
+            - strong [ref=f1e130]: example-store.ru
+            - paragraph [ref=f1e131]: 31 авг., 12:15 · 3 стр. · 6 ошибок
+          - generic [ref=f1e132]: первый
+          - generic [ref=f1e133]:
+            - button "Открыть" [ref=f1e134] [cursor=pointer]
+            - button "↻ Повторить" [ref=f1e135] [cursor=pointer]
+      - generic [ref=f1e136]:
+        - generic [ref=f1e137]:
+          - generic [ref=f1e138]:
+            - paragraph [ref=f1e139]:
+              - generic [ref=f1e140]: REPORT
+              - text: Аудит завершён
+            - heading "SEO-здоровье сайта" [level=2] [ref=f1e141]
+            - paragraph [ref=f1e142]: https://example-store.ru/
+          - generic [ref=f1e143]:
+            - button "Новый аудит" [ref=f1e144] [cursor=pointer]
+            - button "Скачать данные отчёта в JSON" [ref=f1e148] [cursor=pointer]
+            - button "Скачать таблицу страниц в CSV" [ref=f1e152] [cursor=pointer]
+            - button "Скачать план исправлений для Codex" [ref=f1e156] [cursor=pointer]
+            - button "Скачать PDF" [ref=f1e160] [cursor=pointer]
+        - generic [ref=f1e164]:
+          - generic [ref=f1e165]:
+            - generic [ref=f1e166]:
+              - strong [ref=f1e167]: "68"
+              - generic [ref=f1e168]: / 100
+            - generic [ref=f1e169]:
+              - generic [ref=f1e170]: C
+              - heading "Есть заметный потенциал" [level=3] [ref=f1e171]
+              - paragraph [ref=f1e172]: Начните с индексации и критичных технических ошибок — они сильнее всего мешают росту.
+          - generic [ref=f1e173]:
+            - generic [ref=f1e174]:
+              - term [ref=f1e175]: Проверено
+              - definition [ref=f1e176]: "3"
+              - text: страниц
+            - generic [ref=f1e177]:
+              - term [ref=f1e178]: Критично
+              - definition [ref=f1e179]: "1"
+              - text: ошибок
+            - generic [ref=f1e180]:
+              - term [ref=f1e181]: Высокий риск
+              - definition [ref=f1e182]: "2"
+              - text: ошибок
+            - generic [ref=f1e183]:
+              - term [ref=f1e184]: Время
+              - definition [ref=f1e185]: "6.8"
+              - text: секунд
+        - tablist "Разделы отчёта" [ref=f1e186]:
+          - tab "Обзор" [ref=f1e187] [cursor=pointer]
+          - tab "Все ошибки 6" [ref=f1e188] [cursor=pointer]
+          - tab "Ключи и контент" [ref=f1e189] [cursor=pointer]
+          - tab "Страницы" [ref=f1e190] [cursor=pointer]
+          - tab "Архитектура" [active] [selected] [ref=f1e191] [cursor=pointer]
+          - tab "Техническое" [ref=f1e192] [cursor=pointer]
+          - tab "Инструменты" [ref=f1e193] [cursor=pointer]
+        - tabpanel [ref=f1e990]:
+          - generic [ref=f1e992]:
+            - text: CRAWL INTELLIGENCE
+            - heading "Архитектура и обход сайта" [level=3] [ref=f1e993]
+            - paragraph [ref=f1e994]: Глубина, доступность, индексируемость и вероятные ловушки краулера.
+          - generic [ref=f1e1000]:
+            - generic [ref=f1e1001]:
+              - generic [ref=f1e1002]: Индексируемые
+              - strong [ref=f1e1003]: "2"
+              - generic [ref=f1e1004]: из 3
+            - generic [ref=f1e1005]:
+              - generic [ref=f1e1006]: Средний ответ
+              - strong [ref=f1e1007]: 780 мс
+              - generic [ref=f1e1008]: "p95: 1380 мс"
+            - generic [ref=f1e1009]:
+              - generic [ref=f1e1010]: Эффективность обхода
+              - strong [ref=f1e1011]: 7%
+              - generic [ref=f1e1012]: 46 найдено
+            - generic [ref=f1e1013]:
+              - generic [ref=f1e1014]: Макс. глубина
+              - strong [ref=f1e1015]: "2"
+              - generic [ref=f1e1016]: 0 глубже 3
+            - generic [ref=f1e1017]:
+              - generic [ref=f1e1018]: Сиротские
+              - strong [ref=f1e1019]: "0"
+              - generic [ref=f1e1020]: в sitemap без ссылок
+            - generic [ref=f1e1021]:
+              - generic [ref=f1e1022]: Параметры
+              - strong [ref=f1e1023]: "0"
+              - generic [ref=f1e1024]: URL с query string
+          - generic [ref=f1e1025]:
+            - generic [ref=f1e1026]:
+              - generic [ref=f1e1028]:
+                - text: HTTP
+                - heading "Распределение ответов" [level=3] [ref=f1e1029]
+              - generic [ref=f1e1030]:
+                - generic [ref=f1e1031]:
+                  - generic [ref=f1e1032]: 2xx
+                  - strong [ref=f1e1033]: "3"
+                  - generic [ref=f1e1034]: Успешные
+                - generic [ref=f1e1035]:
+                  - generic [ref=f1e1036]: 3xx
+                  - strong [ref=f1e1037]: "0"
+                  - generic [ref=f1e1038]: Редиректы
+                - generic [ref=f1e1039]:
+                  - generic [ref=f1e1040]: 4xx
+                  - strong [ref=f1e1041]: "0"
+                  - generic [ref=f1e1042]: Ошибки клиента
+                - generic [ref=f1e1043]:
+                  - generic [ref=f1e1044]: 5xx
+                  - strong [ref=f1e1045]: "0"
+                  - generic [ref=f1e1046]: Ошибки сервера
+                - generic [ref=f1e1047]:
+                  - generic [ref=f1e1048]: ERR
+                  - strong [ref=f1e1049]: "0"
+                  - generic [ref=f1e1050]: Недоступны
+            - generic [ref=f1e1051]:
+              - generic [ref=f1e1053]:
+                - text: ГЛУБИНА
+                - heading "Уровни от главной" [level=3] [ref=f1e1054]
+              - generic [ref=f1e1055]:
+                - generic [ref=f1e1056]:
+                  - generic [ref=f1e1057]: Уровень 0
+                  - strong [ref=f1e1060]: "1"
+                - generic [ref=f1e1061]:
+                  - generic [ref=f1e1062]: Уровень 1
+                  - strong [ref=f1e1065]: "1"
+                - generic [ref=f1e1066]:
+                  - generic [ref=f1e1067]: Уровень 2
+                  - strong [ref=f1e1070]: "1"
+          - generic [ref=f1e1071]:
+            - generic [ref=f1e1073]:
+              - text: ТРЕБУЮТ ВНИМАНИЯ
+              - heading "Проблемные URL структуры" [level=3] [ref=f1e1074]
+            - generic [ref=f1e1076]:
+              - link "example-store.ru/catalog" [ref=f1e1077] [cursor=pointer]:
+                - /url: https://example-store.ru/catalog
+              - paragraph [ref=f1e1078]:
+                - generic [ref=f1e1079]: не индексируется
+              - button "Детали" [ref=f1e1080] [cursor=pointer]
+          - generic [ref=f1e1081]:
+            - generic [ref=f1e1082]:
+              - generic [ref=f1e1084]:
+                - text: SITEMAP EXPLORER
+                - heading "Карты сайта" [level=3] [ref=f1e1085]
+              - generic [ref=f1e1087]:
+                - generic [ref=f1e1088]: "404"
+                - paragraph [ref=f1e1089]:
+                  - link "example-store.ru/sitemap.xml" [ref=f1e1090] [cursor=pointer]:
+                    - /url: https://example-store.ru/sitemap.xml
+                  - generic [ref=f1e1091]: Не распознана · 0 URL · HTTP 404
+            - generic [ref=f1e1092]:
+              - generic [ref=f1e1094]:
+                - text: LINK CHECKER
+                - heading "Проверка ссылок" [level=3] [ref=f1e1095]
+              - generic [ref=f1e1096]:
+                - generic [ref=f1e1097]:
+                  - strong [ref=f1e1098]: "2"
+                  - generic [ref=f1e1099]: проверено
+                  - strong [ref=f1e1100]: "0"
+                  - generic [ref=f1e1101]: недоступно
+                  - strong [ref=f1e1102]: "0"
+                  - generic [ref=f1e1103]: с редиректом
+                - paragraph [ref=f1e1104]: Недоступных и перенаправляемых ссылок не найдено.
+          - generic [ref=f1e1105]:
+            - generic [ref=f1e1106]:
+              - generic [ref=f1e1107]:
+                - text: CORE WEB VITALS
+                - heading "Эвристические риски LCP, INP и CLS" [level=3] [ref=f1e1108]
+              - generic [ref=f1e1109]:
+                - combobox "Устройство PageSpeed" [ref=f1e1110]:
+                  - option "Mobile" [selected]
+                  - option "Desktop"
+                - button "Запустить PageSpeed" [ref=f1e1111] [cursor=pointer]
+            - paragraph [ref=f1e1112]: HTML-эвристика ниже не является полевыми Core Web Vitals. Кнопка PageSpeed запускает отдельный официальный Lighthouse lab-тест выбранной страницы.
+            - table [ref=f1e1114]:
+              - rowgroup [ref=f1e1115]:
+                - row [ref=f1e1116]:
+                  - columnheader "URL" [ref=f1e1117]
+                  - columnheader "Ответ" [ref=f1e1118]
+                  - columnheader "LCP риск" [ref=f1e1119]
+                  - columnheader "INP риск" [ref=f1e1120]
+                  - columnheader "CLS риск" [ref=f1e1121]
+                  - columnheader "DOM" [ref=f1e1122]
+                  - columnheader "Скрипты" [ref=f1e1123]
+              - rowgroup [ref=f1e1124]:
+                - row [ref=f1e1125]:
+                  - cell [ref=f1e1126]:
+                    - link "example-store.ru" [ref=f1e1127] [cursor=pointer]:
+                      - /url: https://example-store.ru/
+                  - cell "1380 мс" [ref=f1e1128]
+                  - cell "Высокий" [ref=f1e1129]
+                  - cell "Низкий" [ref=f1e1131]
+                  - cell "Низкий" [ref=f1e1133]
+                  - cell "742" [ref=f1e1135]
+                  - cell "9" [ref=f1e1136]
+                - row [ref=f1e1137]:
+                  - cell [ref=f1e1138]:
+                    - link "example-store.ru/catalog" [ref=f1e1139] [cursor=pointer]:
+                      - /url: https://example-store.ru/catalog
+                  - cell "480 мс" [ref=f1e1140]
+                  - cell "Есть риск" [ref=f1e1141]
+                  - cell "Низкий" [ref=f1e1143]
+                  - cell "Низкий" [ref=f1e1145]
+                  - cell "742" [ref=f1e1147]
+                  - cell "9" [ref=f1e1148]
+                - row [ref=f1e1149]:
+                  - cell [ref=f1e1150]:
+                    - link "example-store.ru/delivery" [ref=f1e1151] [cursor=pointer]:
+                      - /url: https://example-store.ru/delivery
+                  - cell "480 мс" [ref=f1e1152]
+                  - cell "Есть риск" [ref=f1e1153]
+                  - cell "Низкий" [ref=f1e1155]
+                  - cell "Низкий" [ref=f1e1157]
+                  - cell "742" [ref=f1e1159]
+                  - cell "9" [ref=f1e1160]
+    - contentinfo [ref=f1e80]:
+      - generic [ref=f1e81]: SITESCAN
+      - paragraph [ref=f1e86]: Локальный SEO-аудитор. Без аккаунтов и трекеров. История хранится только в вашем браузере.
+      - generic [ref=f1e87]: v2.0
+  - generic [ref=f1e90]:
+    - button [ref=f1e91]
+    - button [ref=f1e97]
+    - button [ref=f1e101]
+    - button [ref=f1e109]
